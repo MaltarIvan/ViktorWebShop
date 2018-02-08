@@ -1,0 +1,24 @@
+﻿@using WebShop.Models.WebShop;
+@model ProductVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ProductPartial</title>
+</head>
+<body>
+    <div style="background-color:azure; margin:5px;">
+        <p>@Model.Name</p>
+        <p>@Model.Description</p>
+        <p><span>Cijena: </span>@Model.Price</p>
+        <p>Dostupna količina: @Model.Quantity</p>
+        <img style="height: 100px; width: 100px;" src="~/Content/products/@Model.ImageName" />
+    </div>
+    <hr />
+</body>
+</html>

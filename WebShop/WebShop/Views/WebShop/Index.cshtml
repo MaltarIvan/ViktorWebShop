@@ -1,0 +1,13 @@
+﻿@using WebShop.Models.WebShop
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model WebShopVM
+@{
+    ViewData["Title"] = "Trgovina";
+}
+
+<h2>Trgovina</h2>
+
+@foreach (var item in Model.ProductsVM)
+{
+    @Html.Partial("~/Views/Shared/ProductPartial.cshtml", item)
+}
