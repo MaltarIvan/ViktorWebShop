@@ -1,5 +1,5 @@
 ﻿@using WebShop.Models.WebShop;
-@model ProductVM
+@model CartItemVM
 @{
     Layout = null;
 }
@@ -9,16 +9,13 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ProductPartial</title>
+    <title>CartItemPartial</title>
 </head>
 <body>
     <div style="background-color:azure; margin:5px;">
-        <p>@Model.Name</p>
-        <p>@Model.Description</p>
-        <p><span>Cijena: </span>@Model.Price</p>
-        <p>Dostupna količina: @Model.Quantity</p>
+        <p>@Model.ProductName</p>
+        <p>Količina: @Model.Quantity</p>
         <img style="height: 100px; width: 100px;" src="~/Content/products/@Model.ImageName" />
-        <a asp-controller="WebShop" asp-action="AddProductToCart" asp-route-productID="@Model.ProductID">Add to cart</a>
     </div>
     <hr />
 </body>

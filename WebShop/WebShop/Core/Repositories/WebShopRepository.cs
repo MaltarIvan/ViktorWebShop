@@ -9,51 +9,91 @@ namespace WebShop.Core.Repositories
 {
     public class WebShopRepository : IWebShopRepository
     {
-        private WebShopDbContext Context;
+        private WebShopDbContext _context;
 
         public WebShopRepository(WebShopDbContext context)
         {
-            Context = context;
+            _context = context;
         }
 
         public async Task<Product> AddProductAsync(Product product)
         {
-            Context.Products.Add(product);
-            await Context.SaveChangesAsync();
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
             return product;
         }
 
         public async Task<Product> DeleteProductAsync(Guid productID)
         {
             Product product = await GetProductAsync(productID);
-            Context.Products.Remove(product);
-            await Context.SaveChangesAsync();
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
             return product;
         }
 
         public async Task<Product> DeleteProductAsync(Product product)
         {
-            Context.Products.Remove(product);
-            await Context.SaveChangesAsync();
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
             return product;
         }
 
         public async Task<List<Product>> GetAllProductsAsync()
         {
-            return await Context.Products.ToListAsync();
+            return await _context.Products.ToListAsync();
         }
 
         public async Task<Product> GetProductAsync(Guid productID)
         {
-            return await Context.Products.SingleOrDefaultAsync(p => p.ProductID == productID);
+            return await _context.Products.SingleAsync(p => p.ProductID == productID);
         }
 
         public async Task<Product> UpdateProductAsync(Product product)
         {
-            Context.Products.Attach(product);
-            Context.Entry(product).State = EntityState.Modified;
-            await Context.SaveChangesAsync();
+            _context.Products.Attach(product);
+            _context.Entry(product).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
             return product;
+        }
+
+        public async Task<ShoppingCart> AddShoppingCartAsync(ShoppingCart shoppingCart)
+        {
+            _context.ShoppingCarts.Add(shoppingCart);
+            await _context.SaveChangesAsync();
+            return shoppingCart;
+        }
+
+        public async Task<ShoppingCart> GetShoppingCartAsync(Guid cartID)
+        {
+            return await _context.ShoppingCarts.Include(s => s.CartItems.Select(c => c.Product)).SingleOrDefaultAsync(s => s.ShoppingCartID == cartID);
+        }
+
+        public async Task<ShoppingCart> UpdateShoppingCartAsync(ShoppingCart shoppingCart)
+        {
+            _context.ShoppingCarts.Attach(shoppingCart);
+            _context.Entry(shoppingCart).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return shoppingCart;
+        }
+
+        public async Task<CartItem> AddCartItemAsync(CartItem cartItem)
+        {
+            _context.CartItems.Add(cartItem);
+            await _context.SaveChangesAsync();
+            return cartItem;
+        }
+
+        public async Task<CartItem> GetCartItemAsync(Guid cartItemID)
+        {
+            return await _context.CartItems.SingleAsync(c => c.CartItemID == cartItemID);
+        }
+
+        public async Task<CartItem> UpdateCartItemAsync(CartItem cartItem)
+        {
+            _context.CartItems.Attach(cartItem);
+            _context.Entry(cartItem).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return cartItem;
         }
     }
 }

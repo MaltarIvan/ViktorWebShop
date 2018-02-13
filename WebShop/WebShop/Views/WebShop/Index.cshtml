@@ -7,6 +7,8 @@
 
 <h2>Trgovina</h2>
 
+@Html.Partial("~/Views/WebShop/ShoppingCartPartial.cshtml")
+
 @foreach (var item in Model.ProductsVM)
 {
     @Html.Partial("~/Views/Shared/ProductPartial.cshtml", item)

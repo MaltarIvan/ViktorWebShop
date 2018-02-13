@@ -7,6 +7,8 @@ using WebShop.Core.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using WebShop.Core;
 using WebShop.Models.WebShop;
+using WebShop.Utilities;
+using Microsoft.AspNetCore.Http;
 
 namespace WebShop.Controllers
 {
@@ -25,7 +27,23 @@ namespace WebShop.Controllers
         {
             List<Product> products = await _repository.GetAllProductsAsync();
             WebShopVM webShopVM = new WebShopVM(products);
+            // ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
             return View(webShopVM);
+        }
+
+        public async Task<IActionResult> AddProductToCart(Guid productID)
+        {
+            ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
+            await shoppingCartActions.AddProductAsync(productID);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult ShoppingCart()
+        {
+            ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
+            List<CartItem> cartItems = shoppingCartActions.GetCartItems();
+            ShoppingCartVM shoppingCartVM = new ShoppingCartVM(cartItems);
+            return View(shoppingCartVM);
         }
     }
 }
