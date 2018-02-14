@@ -32,6 +32,7 @@ namespace WebShop.Core.Database
             modelBuilder.Entity<ShoppingCart>().HasKey(s => s.ShoppingCartID);
             modelBuilder.Entity<ShoppingCart>().HasMany(s => s.CartItems).WithRequired(c => c.ShoppingCart);
             modelBuilder.Entity<ShoppingCart>().Property(s => s.DateCreated).IsRequired();
+            modelBuilder.Entity<ShoppingCart>().Property(s => s.TotalPrice).IsRequired();
 
             modelBuilder.Entity<CartItem>().HasKey(c => c.CartItemID);
             modelBuilder.Entity<CartItem>().Property(c => c.ShoppingCartID).IsRequired();
@@ -40,6 +41,7 @@ namespace WebShop.Core.Database
             modelBuilder.Entity<CartItem>().Property(c => c.DateAdded).IsRequired();
             modelBuilder.Entity<CartItem>().Property(c => c.ProductID).IsRequired();
             modelBuilder.Entity<CartItem>().HasRequired(c => c.Product);
+            modelBuilder.Entity<CartItem>().Property(c => c.PricePerItem).IsRequired();
 
             modelBuilder.Entity<Order>().HasKey(o => o.OrderID);
             modelBuilder.Entity<Order>().Property(o => o.ShoppingCartID).IsRequired();
@@ -53,7 +55,7 @@ namespace WebShop.Core.Database
             modelBuilder.Entity<Order>().Property(o => o.Email).IsRequired();
             modelBuilder.Entity<Order>().Property(o => o.PhoneNumber).IsRequired();
             modelBuilder.Entity<Order>().Property(o => o.Details).IsRequired();
-            modelBuilder.Entity<Order>().Property(o => o.PromoCode).IsRequired();
+            modelBuilder.Entity<Order>().Property(o => o.PromoCode).IsOptional();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace WebShop.Core
         public DateTime DateAdded { get; set; }
         public Guid ProductID { get; set; }
         public Product Product { get; set; }
+        public double PricePerItem { get; set; }
         public int Quantity { get; set; }
 
         public CartItem(ShoppingCart shoppingCart, Product product, int quantity)
@@ -24,6 +25,7 @@ namespace WebShop.Core
             DateAdded = DateTime.Now;
             ProductID = product.ProductID;
             Product = product;
+            PricePerItem = product.Price;
             Quantity = quantity;
         }
 

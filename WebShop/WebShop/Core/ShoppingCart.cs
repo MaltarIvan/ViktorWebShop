@@ -12,6 +12,20 @@ namespace WebShop.Core
         public Guid ShoppingCartID { get; set; }
         public List<CartItem> CartItems { get; set; }
         public DateTime DateCreated { get; set; }
+        public double TotalPrice {
+            get
+            {
+                double res = 0;
+                foreach (var item in CartItems)
+                {
+                    res += item.PricePerItem * item.Quantity;
+                }
+                return res;
+            }
+            private set
+            {
+            }
+        }
 
         public ShoppingCart(Guid shoppingCartID)
         {

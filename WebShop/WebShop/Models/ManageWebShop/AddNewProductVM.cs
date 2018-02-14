@@ -14,7 +14,7 @@ namespace WebShop.Models.ManageWebShop
         [Required, MinLength(3)]
         public string Description { get; set; }
         [Required]
-        public double Price { get; set; }
+        public string Price { get; set; }
         [Required]
         public IFormFile Image { get; set; }
         [Required]

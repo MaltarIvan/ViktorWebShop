@@ -11,12 +11,12 @@ using WebShop.Core;
 
 namespace WebShop.Controllers
 {
-    public class ManageWebShopController : Controller
+    public class ManageWebPageController : Controller
     {
         private readonly IWebShopRepository _repository;
         private readonly IHostingEnvironment _hostingEnvironment;
 
-        public ManageWebShopController(IWebShopRepository repository, IHostingEnvironment hostingEnvironment)
+        public ManageWebPageController(IWebShopRepository repository, IHostingEnvironment hostingEnvironment)
         {
             _repository = repository;
             _hostingEnvironment = hostingEnvironment;
@@ -44,10 +44,20 @@ namespace WebShop.Controllers
             };
             if (ModelState.IsValid)
             {
+                string priceStr = addNewProductVM.Price;
+                priceStr = priceStr.Replace(".", ",");
+                Decimal priceDec = Convert.ToDecimal(priceStr);
+                bool isPriceFormat = Decimal.Round(priceDec, 2) == priceDec;
                 if (!validImageTypes.Contains(addNewProductVM.Image.ContentType))
                 {
                     ModelState.AddModelError("CustomError", "Please choose either a GIF, JPG or PNG image.");
                     addNewProductVM.Image = null;
+                    return View(addNewProductVM);
+                }
+                else if (!isPriceFormat)
+                {
+                    ModelState.AddModelError("CustomError", "The price format is incorrect.");
+                    addNewProductVM.Price = null;
                     return View(addNewProductVM);
                 }
                 else
@@ -60,7 +70,7 @@ namespace WebShop.Controllers
                     {
                         await file.CopyToAsync(fileStream);
                     }
-                    Product product = new Product(addNewProductVM.Name, addNewProductVM.Description, addNewProductVM.Price, fileName, addNewProductVM.Quantity);
+                    Product product = new Product(addNewProductVM.Name, addNewProductVM.Description, Convert.ToDouble(priceDec), fileName, addNewProductVM.Quantity);
                     await _repository.AddProductAsync(product);
                     return RedirectToAction("Index");
                 }

@@ -1,4 +1,4 @@
-﻿@using WebShop.Models.WebShop
+﻿@using WebShop.Models.Shared
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model ShoppingCartVM
 @{
@@ -7,8 +7,15 @@
 }
 
 <h2>ShoppingCart</h2>
+<label>Ukupno: </label><p>@Model.TotalPrice kn</p>
+
+<div>
+    <a asp-controller="NewOrder" asp-action="AddNewOrder">Naruči</a>
+</div>
 
 @foreach (var item in Model.CartItemsVM)
 {
-    @Html.Partial("~/Views/WebShop/CartItemPartial.cshtml", item);
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/WebShop/CartItemPartial.cshtml", item)
+    </div>
 }

@@ -54,6 +54,11 @@ namespace WebShop.Utilities
             }
         }
 
+        internal ShoppingCart GetShoppingCart()
+        {
+            return _shoppingCart;
+        }
+
         internal List<CartItem> GetCartItems()
         {
             return _shoppingCart.CartItems;

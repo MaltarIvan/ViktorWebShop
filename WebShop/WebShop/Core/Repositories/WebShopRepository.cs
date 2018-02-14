@@ -95,5 +95,35 @@ namespace WebShop.Core.Repositories
             await _context.SaveChangesAsync();
             return cartItem;
         }
+
+        public async Task<Order> AddOrderAsync(Order order)
+        {
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+            return order;
+        }
+
+        public async Task<List<Order>> GetAllCompletedOrdersAsync()
+        {
+            return await _context.Orders.Where(o => o.Completed).ToListAsync();
+        }
+
+        public async Task<Order> GetOrderAsync(Guid orderID)
+        {
+            return await _context.Orders.Include(o => o.ShoppingCart.CartItems.Select(c => c.Product)).SingleOrDefaultAsync(o => o.OrderID == orderID);
+        }
+
+        public async Task<Order> UpdateOrderAsync(Order order)
+        {
+            _context.Orders.Attach(order);
+            _context.Entry(order).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return order;
+        }
+
+        public async Task<List<Order>> GetDeliveredOrdersAsync()
+        {
+            return await _context.Orders.Where(o => o.Delivered).ToListAsync();
+        }
     }
 }

@@ -23,6 +23,8 @@ namespace WebShop.Core
         public string PhoneNumber { get; set; }
         public string Details { get; set; }
         public string PromoCode { get; set; }
+        public bool Completed { get; set; }
+        public bool Delivered { get; set; }
 
         public Order(ShoppingCart shoppingCart, string name, string surname, string streetAdress, string city, int postalCode, string country, string email, string phoneNumber, string details, string promoCode)
         {
@@ -38,6 +40,8 @@ namespace WebShop.Core
             PhoneNumber = phoneNumber;
             Details = details;
             PromoCode = promoCode;
+            Completed = false;
+            Delivered = false;
         }
 
         public Order()

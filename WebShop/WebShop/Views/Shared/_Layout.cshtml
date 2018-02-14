@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebShop</title>
+    <title>@ViewData["Title"] - Istra Mushrooms</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -26,29 +26,37 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">WebShop</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Istra Mushrooms</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Početna</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">Info</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Products">Proizvodi</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Location">Lokacija</a></li>
+                    <li><a asp-area="" asp-controller="Gallery" asp-action="Gallery">Galerija</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">Info</a></li>
                     <li><a asp-area="" asp-controller="WebShop" asp-action="Index">Trgovina</a></li>
                     @if (User.IsInRole("Admin"))
                     {
-                        <li><a asp-area="" asp-controller="ManageWebShop" asp-action="Index">Uredi Web Shop</a></li>
+                        <li><a asp-area="" asp-controller="ManageWebPage" asp-action="Index">Uredi Stranicu</a></li>
                     }
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
     </nav>
+    <div style="text-align: center">
+        <img src="~/images/header.png" />
+    </div>
     <div class="container body-content">
         @RenderBody()
+        <!--
         <hr />
         <footer>
             <p>&copy; 2018 - WebShop</p>
         </footer>
+            -->
     </div>
 
     <environment include="Development">

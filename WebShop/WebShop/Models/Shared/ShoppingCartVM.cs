@@ -4,16 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebShop.Core;
 
-namespace WebShop.Models.WebShop
+namespace WebShop.Models.Shared
 {
     public class ShoppingCartVM
     {
-        public List<CartItemVM> CartItemsVM;
+        public List<CartItemVM> CartItemsVM { get; set; }
+        public double TotalPrice { get; set; }
 
-        public ShoppingCartVM(List<CartItem> cartItems)
+        public ShoppingCartVM(ShoppingCart shoppingCart)
         {
+            TotalPrice = shoppingCart.TotalPrice;
             CartItemsVM = new List<CartItemVM>();
-            foreach (var item in cartItems)
+            foreach (var item in shoppingCart.CartItems)
             {
                 CartItemsVM.Add(new CartItemVM(item));
             }

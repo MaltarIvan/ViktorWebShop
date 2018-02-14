@@ -1,4 +1,4 @@
-﻿@using WebShop.Models.WebShop;
+﻿@using WebShop.Models.Shared;
 @model CartItemVM
 @{
     Layout = null;
@@ -15,7 +15,9 @@
     <div style="background-color:azure; margin:5px;">
         <p>@Model.ProductName</p>
         <p>Količina: @Model.Quantity</p>
-        <img style="height: 100px; width: 100px;" src="~/Content/products/@Model.ImageName" />
+        <p>Cijena proizvoda: @Model.PricePerItem kn</p>
+        <p>Ukupno: @Model.TotalPrice kn</p>
+        <img style="height: 100px; width: 100px;" src="~/Content/products/@Model.ImageName" /><br />
     </div>
     <hr />
 </body>

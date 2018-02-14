@@ -2,14 +2,19 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model WebShopVM
 @{
-    ViewData["Title"] = "Trgovina";
+    ViewData["Title"] = "Proizvodi";
 }
 
-<h2>Trgovina</h2>
+<h2>Proizvodi</h2>
 
 @Html.Partial("~/Views/WebShop/ShoppingCartPartial.cshtml")
 
-@foreach (var item in Model.ProductsVM)
-{
-    @Html.Partial("~/Views/Shared/ProductPartial.cshtml", item)
-}
+<div class="row">
+    @foreach (var item in Model.ProductsVM)
+    {
+        <div class="col-sm-6">
+            @Html.Partial("~/Views/Shared/ProductPartial.cshtml", item)
+        </div>
+    }
+</div>
+

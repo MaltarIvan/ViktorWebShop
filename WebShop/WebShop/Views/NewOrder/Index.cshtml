@@ -1,0 +1,46 @@
+﻿@using WebShop.Models.NewOrder
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model NewOrderVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/NewOrder/index.css" asp-append-version="true" />
+</head>
+
+<h2>Naruđba</h2>
+
+<table class="check-out-items-table">
+    <thead>
+        <tr>
+            <th>Proizvod</th>
+            <th>Količina</th>
+            <th>Cijena po komadu</th>
+            <th>Ukupnna cijena</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ShoppingCartVM.CartItemsVM)
+    {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.PricePerItem</td>
+                <td>@item.TotalPrice</td>
+            </tr>
+    }
+    </tbody>
+    Ukupno: @Model.ShoppingCartVM.TotalPrice
+</table>
+<p>Ime: @Model.Name</p>
+<p>Prezime: @Model.Surname</p>
+<p>Adresa: @Model.StreetAdress</p>
+<p>Grad: @Model.City</p>
+<p>Poštanski broj: @Model.PostalCode</p>
+<p>Država: @Model.Country</p>
+<p>Email: @Model.Email</p>
+<p>Broj telefona: @Model.PhoneNumber</p>
+<p>Detalji: @Model.Details</p>
+<p>PromoCode: @Model.PromoCode</p>

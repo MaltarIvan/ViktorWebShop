@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using WebShop.Core.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using WebShop.Core;
-using WebShop.Models.WebShop;
+using WebShop.Models.Shared;
 using WebShop.Utilities;
 using Microsoft.AspNetCore.Http;
+using WebShop.Models.WebShop;
 
 namespace WebShop.Controllers
 {
@@ -41,8 +42,7 @@ namespace WebShop.Controllers
         public IActionResult ShoppingCart()
         {
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
-            List<CartItem> cartItems = shoppingCartActions.GetCartItems();
-            ShoppingCartVM shoppingCartVM = new ShoppingCartVM(cartItems);
+            ShoppingCartVM shoppingCartVM = new ShoppingCartVM(shoppingCartActions.GetShoppingCart());
             return View(shoppingCartVM);
         }
     }
