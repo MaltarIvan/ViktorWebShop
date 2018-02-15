@@ -8,9 +8,11 @@ using System.IO;
 using WebShop.Core.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using WebShop.Core;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebShop.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ManageWebPageController : Controller
     {
         private readonly IWebShopRepository _repository;
@@ -76,6 +78,34 @@ namespace WebShop.Controllers
                 }
             }
             return View(addNewProductVM);
+        }
+
+        public IActionResult AddNewPromoCode()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> AllOrders()
+        {
+            List<Order> completedOrders = await _repository.GetAllCompletedOrdersAsync();
+            List<OrderVM> completedOrdersVM = new List<OrderVM>();
+            foreach (var item in completedOrders)
+            {
+                completedOrdersVM.Add(new OrderVM(item));
+            }
+            return View("Orders", completedOrdersVM);
+        }
+
+        public async Task<IActionResult> DeliveredOrders()
+        {
+            List<Order> completedOrders = await _repository.GetDeliveredOrdersAsync();
+            List<OrderVM> completedOrdersVM = new List<OrderVM>();
+            foreach (var item in completedOrders)
+            {
+                completedOrdersVM.Add(new OrderVM(item));
+            }
+            return View("Orders", completedOrdersVM);
+            return View("Orders");
         }
     }
 }

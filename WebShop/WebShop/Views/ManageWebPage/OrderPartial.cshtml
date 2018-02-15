@@ -1,0 +1,56 @@
+﻿@using WebShop.Models.ManageWebShop
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model OrderVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrderPartial</title>
+    <head>
+        <link rel="stylesheet" href="~/css/ManageWebPage/orderPartial.css" asp-append-version="true" />
+    </head>
+</head>
+<body>
+    <table class="order-items-table">
+        <thead>
+            <tr>
+                <th>Proizvod</th>
+                <th>Količina</th>
+                <th>Cijena po komadu</th>
+                <th>Ukupna cijena</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ShoppingCartVM.CartItemsVM)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.PricePerItem</td>
+                    <td>@item.TotalPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-sm-6">
+            <p>Ukupno: @Model.ShoppingCartVM.TotalPrice</p>
+            <p>Ime: @Model.Name</p>
+            <p>Prezime: @Model.Surname</p>
+            <p>Adresa: @Model.StreetAdress</p>
+            <p>Grad: @Model.City</p>
+            <p>Poštanski broj: @Model.PostalCode</p>
+            <p>Država: @Model.Country</p>
+            <p>Email: @Model.Email</p>
+            <p>Broj telefona: @Model.PhoneNumber</p>
+            <p>Detalji: @Model.Details</p>
+            <p>Promo Code: @Model.PromoCode</p>
+        </div>
+    </div>
+</body>
+</html>

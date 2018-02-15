@@ -1,0 +1,22 @@
+﻿@using WebShop.Models.ManageWebShop
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<OrderVM>
+@{
+    ViewData["Title"] = "Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Naruđbe</h2>
+<div class="row">
+    <div class="col-sm-4">
+        <a class="btn btn-primary" asp-action="AllOrders">Sve Naruđbe</a><br />
+    </div>
+    <div class="col-sm-4">
+        <a class="btn btn-primary" asp-action="DeliveredOrders">Poslane Naruđbe</a><br />
+    </div>
+</div>
+@foreach (var item in Model)
+{
+    @Html.Partial("~/Views/ManageWebPage/OrderPartial.cshtml", item)
+}
+

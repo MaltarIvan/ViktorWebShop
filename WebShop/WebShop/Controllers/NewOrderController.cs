@@ -131,6 +131,8 @@ namespace WebShop.Controllers
         public async Task<IActionResult> CompleteOrder(Guid orderID)
         {
             Order order = await _repository.GetOrderAsync(orderID);
+            order.Completed = true;
+            await _repository.UpdateOrderAsync(order);
             SendOrderEmailShop(order);
             SendOrderEmailClient(order);
             return RedirectToAction("Index", "WebShop");
