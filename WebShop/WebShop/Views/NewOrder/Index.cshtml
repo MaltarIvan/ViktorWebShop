@@ -18,7 +18,7 @@
             <th>Proizvod</th>
             <th>Količina</th>
             <th>Cijena po komadu</th>
-            <th>Ukupnna cijena</th>
+            <th>Ukupna cijena</th>
         </tr>
     </thead>
     <tbody>
@@ -32,8 +32,8 @@
             </tr>
     }
     </tbody>
-    Ukupno: @Model.ShoppingCartVM.TotalPrice
 </table>
+<p>Ukupno: @Model.ShoppingCartVM.TotalPrice</p>
 <p>Ime: @Model.Name</p>
 <p>Prezime: @Model.Surname</p>
 <p>Adresa: @Model.StreetAdress</p>
@@ -43,7 +43,7 @@
 <p>Email: @Model.Email</p>
 <p>Broj telefona: @Model.PhoneNumber</p>
 <p>Detalji: @Model.Details</p>
-<p>PromoCode: @Model.PromoCode</p>
+<p>Promo Code: @Model.PromoCode</p>
 <div class="row">
     <div class="col-sm-2">
         <a class="btn btn-primary" asp-action="CompleteOrder" asp-route-orderID="@Model.OrderID">Dovrši Naruđbu</a>

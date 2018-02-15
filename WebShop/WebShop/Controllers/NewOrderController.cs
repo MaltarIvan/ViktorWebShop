@@ -141,8 +141,8 @@ namespace WebShop.Controllers
             MailMessage message = new MailMessage();
             message.To.Add(new MailAddress("maltar.ivan@gmail.com"));
             message.From = new MailAddress("maltar.ivan@gmail.com");
-            message.Body = "[Nova naruđba]";
-            message.Body = "Napravljena je nova naruđba:<br/> " + order.ToEmailString();
+            message.Subject = "[Nova naruđba]";
+            message.Body = "<h3>Napravljena je nova naruđba:</h3><br/><hr/> " + order.ToEmailString();
 
             message.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
@@ -157,8 +157,8 @@ namespace WebShop.Controllers
             MailMessage message = new MailMessage();
             message.To.Add(new MailAddress(order.Email));
             message.From = new MailAddress("maltar.ivan@gmail.com");
-            message.Body = "[Nova naruđba]";
-            message.Body = "Upravo ste naručili:<br/>" + order.ToEmailString() + "<br/> Uskoro će mo vam se javiti s detaljima o plačanju i preuzimanju vaše naruđbe!";
+            message.Subject = "[Nova naruđba]";
+            message.Body = "<h3>Upravo ste naručili:</h3><br/><hr/>" + order.ToEmailString() + "<hr/><br/> Uskoro ćemo vam se javiti s detaljima o plačanju i preuzimanju vaše naruđbe!";
 
             message.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);

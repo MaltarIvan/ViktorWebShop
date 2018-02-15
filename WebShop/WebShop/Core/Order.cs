@@ -51,32 +51,36 @@ namespace WebShop.Core
         public string ToEmailString()
         {
             double totalPrice = 0;
+            string tableStyle = "border: 1px solid black;border-collapse: collapse;margin-bottom: 25px;width:100%;";
+            string tableCellStyle = "border: 1px solid black;border-collapse: collapse;padding:5px;text-align:left;";
 
-            string str = "Broj naruđbe: " + this.OrderID + "<br/>" +
-                "Datum: " + this.DateCreated +
-                "<br/><table><thead><tr><th>Proizvod</th><th>Količina</th><th>Cijena po komadu</th><th>Ukupnna cijena</th></tr></thead><tbody>";
+            string str = "<br/><table style=\"" + tableStyle + "\">" +
+                "<thead><tr><th style=\"" + tableCellStyle + "\">Proizvod</th><th style=\"" + tableCellStyle + "\">Količina</th><th style=\"" + tableCellStyle + "\">Cijena po komadu</th><th style=\"" + tableCellStyle + "\">Ukupna cijena</th></tr></thead><tbody>";
 
             foreach (var item in ShoppingCart.CartItems)
             {
                 totalPrice += item.PricePerItem * item.Quantity;
-                str += "<tr><td>" + item.Product.Name + 
-                    "</td><td>" + item.Quantity + 
-                    "</td><td>" + item.PricePerItem + 
-                    "</td><td>" + item.PricePerItem * item.Quantity + 
+                str += "<tr><td style=\"" + tableCellStyle + "\">" + item.Product.Name +
+                    "</td><td style=\"" + tableCellStyle + "\">" + item.Quantity +
+                    "</td><td style=\"" + tableCellStyle + "\">" + item.PricePerItem + " kn" +
+                    "</td><td style=\"" + tableCellStyle + "\">" + item.PricePerItem * item.Quantity + "kn " + 
                     "</td></tr>";
             }
-            str += "</tbody></table><br/>Ukupna cijena: " + totalPrice + 
-                "<br/>Ime: " + Name + 
-                "<br/>Prezime: " + Surname + 
-                "<br/>Adresa: " + StreetAdress + 
-                "<br/>Grad: " + City + 
-                "<br/>Poštanski broj: " + PostalCode + 
-                "<br/>Država: " + Country + 
-                "<br/>Email: " + Email + 
-                "<br/>Broj telefona: " + PhoneNumber + 
-                "<br/>Detalji: " + Details + 
-                "<br/>Promo Kod: " + PromoCode;
-
+            str += "</tbody></table><hr/><br/>" +
+                "<br/><b>Ukupna cijena:</b> " + totalPrice + " kn<hr/>" +
+                "<b>Broj naruđbe:</b> " + this.OrderID +
+                "<br/><b>Datum:</b> " + this.DateCreated +
+                "<br/><b>Ime:</b> " + Name +
+                "<br/><b>Prezime:</b> " + Surname +
+                "<br/><b>Adresa:</b> " + StreetAdress +
+                "<br/><b>Grad:</b> " + City +
+                "<br/><b>Poštanski broj:</b> " + PostalCode +
+                "<br/><b>Država:</b> " + Country +
+                "<br/><b>Email:</b> " + Email +
+                "<br/><b>Broj telefona:</b> " + PhoneNumber +
+                "<br/><b>Detalji:</b> " + Details +
+                "<br/><b>Promo Kod:</b> " + PromoCode;
+            
             return str;
         }
     }

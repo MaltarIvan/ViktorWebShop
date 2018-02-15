@@ -1,7 +1,8 @@
 ﻿.check-out-items-table {
     border: 1px solid black;
     border-collapse: collapse;
-    margin-bottom: 25px
+    margin-bottom: 25px;
+    width: 100%;
 }
 
 th, td {
@@ -9,22 +10,4 @@ th, td {
     border-collapse: collapse;
     padding: 15px;
     text-align: left;
-}
-
-#t01 {
-    width: 100%;
-    background-color: #f1f1c1;
-}
-
-    #t01 tr:nth-child(even) {
-        background-color: #eee;
-    }
-
-    #t01 tr:nth-child(odd) {
-        background-color: #fff;
-    }
-
-#t01 th {
-    color: white;
-    background-color: black;
 }
