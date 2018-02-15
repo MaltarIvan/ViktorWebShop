@@ -54,7 +54,7 @@ namespace WebShop.Core.Database
             modelBuilder.Entity<Order>().Property(o => o.Country).IsRequired();
             modelBuilder.Entity<Order>().Property(o => o.Email).IsRequired();
             modelBuilder.Entity<Order>().Property(o => o.PhoneNumber).IsRequired();
-            modelBuilder.Entity<Order>().Property(o => o.Details).IsRequired();
+            modelBuilder.Entity<Order>().Property(o => o.Details).IsOptional();
             modelBuilder.Entity<Order>().Property(o => o.PromoCode).IsOptional();
         }
     }

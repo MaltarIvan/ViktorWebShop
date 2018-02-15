@@ -1,0 +1,36 @@
+﻿@using WebShop.Models.NewOrder
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model ChangeOrderDetailsVM
+@{
+    ViewData["Title"] = "ChangeOrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ispunito vaše podatke</h2>
+
+<form asp-action="ChangeOrderDetails" , method="post">
+    @if (ViewContext.ViewData.ModelState.IsValid == false)
+            {
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                There were some input errors.
+            </div>
+            <div class="panel-body">
+                <div asp-validation-summary="All" class="text-danger"></div>
+            </div>
+        </div>
+    }
+    <label>Ime: </label><input asp-for="Name" /><span asp-validation-for="Name" style="color:red"></span><br />
+    <label>Prezime: </label><input asp-for="Surname" /><span asp-validation-for="Surname" style="color:red"></span><br />
+    <label>Adresa: </label><input asp-for="StreetAdress" /><span asp-validation-for="StreetAdress" style="color:red"></span><br />
+    <label>Grad: </label><input asp-for="City" /><span asp-validation-for="City" style="color:red"></span><br />
+    <label>Poštanski broj: : </label><input asp-for="PostalCode" /><span asp-validation-for="PostalCode" style="color:red"></span><br />
+    <label>Država: </label><input asp-for="Country" /><span asp-validation-for="Country" style="color:red"></span><br />
+    <label>Email: </label><input asp-for="Email" type="email" /><span asp-validation-for="Email" style="color:red"></span><br />
+    <label>Broj telefona: </label><input asp-for="PhoneNumber" /><span asp-validation-for="PhoneNumber" style="color:red"></span><br />
+    <label>Detalji: </label><input asp-for="Details" /><span asp-validation-for="Details" style="color:red"></span><br />
+    <label>Promotivni kod: </label><input asp-for="PromoCode" /><span asp-validation-for="PromoCode" style="color:red"></span><br />
+    <input asp-for="OrderID" type="hidden"/>
+    <input type="submit" />
+</form>
+

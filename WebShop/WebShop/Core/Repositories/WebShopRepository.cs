@@ -125,5 +125,12 @@ namespace WebShop.Core.Repositories
         {
             return await _context.Orders.Where(o => o.Delivered).ToListAsync();
         }
+
+        public async Task<Order> DeleteOrderAsync(Order order)
+        {
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
+            return order;
+        }
     }
 }

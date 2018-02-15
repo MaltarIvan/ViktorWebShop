@@ -44,3 +44,14 @@
 <p>Broj telefona: @Model.PhoneNumber</p>
 <p>Detalji: @Model.Details</p>
 <p>PromoCode: @Model.PromoCode</p>
+<div class="row">
+    <div class="col-sm-2">
+        <a class="btn btn-primary" asp-action="CompleteOrder" asp-route-orderID="@Model.OrderID">Dovrši Naruđbu</a>
+    </div>
+    <div class="col-sm-2">
+        <a class="btn btn-primary" asp-action="ChangeOrderDetails" asp-route-orderID="@Model.OrderID">Promjeni Podatke</a>
+    </div>
+    <div class="col-sm-2">
+        <a class="btn btn-danger" asp-action="CancleOrder" asp-route-orderID="@Model.OrderID">Otkaži Naruđbu</a>
+    </div>
+</div>

@@ -47,5 +47,37 @@ namespace WebShop.Core
         public Order()
         {
         }
+
+        public string ToEmailString()
+        {
+            double totalPrice = 0;
+
+            string str = "Broj naruđbe: " + this.OrderID + "<br/>" +
+                "Datum: " + this.DateCreated +
+                "<br/><table><thead><tr><th>Proizvod</th><th>Količina</th><th>Cijena po komadu</th><th>Ukupnna cijena</th></tr></thead><tbody>";
+
+            foreach (var item in ShoppingCart.CartItems)
+            {
+                totalPrice += item.PricePerItem * item.Quantity;
+                str += "<tr><td>" + item.Product.Name + 
+                    "</td><td>" + item.Quantity + 
+                    "</td><td>" + item.PricePerItem + 
+                    "</td><td>" + item.PricePerItem * item.Quantity + 
+                    "</td></tr>";
+            }
+            str += "</tbody></table><br/>Ukupna cijena: " + totalPrice + 
+                "<br/>Ime: " + Name + 
+                "<br/>Prezime: " + Surname + 
+                "<br/>Adresa: " + StreetAdress + 
+                "<br/>Grad: " + City + 
+                "<br/>Poštanski broj: " + PostalCode + 
+                "<br/>Država: " + Country + 
+                "<br/>Email: " + Email + 
+                "<br/>Broj telefona: " + PhoneNumber + 
+                "<br/>Detalji: " + Details + 
+                "<br/>Promo Kod: " + PromoCode;
+
+            return str;
+        }
     }
 }

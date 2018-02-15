@@ -27,5 +27,6 @@ namespace WebShop.Core.Repositories
         Task<List<Order>> GetDeliveredOrdersAsync();
         Task<Order> GetOrderAsync(Guid orderID);
         Task<Order> UpdateOrderAsync(Order order);
+        Task<Order> DeleteOrderAsync(Order order);
     }
 }
