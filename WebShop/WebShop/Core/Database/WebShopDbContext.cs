@@ -56,13 +56,15 @@ namespace WebShop.Core.Database
             modelBuilder.Entity<Order>().Property(o => o.Email).IsRequired();
             modelBuilder.Entity<Order>().Property(o => o.PhoneNumber).IsOptional();
             modelBuilder.Entity<Order>().Property(o => o.MobilePhoneNumber).IsOptional();
-            modelBuilder.Entity<Order>().Property(o => o.PromoCode).IsOptional();
+            modelBuilder.Entity<Order>().HasOptional(o => o.PromoCode);
             modelBuilder.Entity<Order>().Property(o => o.IsCompleted).IsRequired();
             modelBuilder.Entity<Order>().Property(o => o.IsDelivered).IsRequired();
 
             modelBuilder.Entity<PromoCode>().HasKey(p => p.PromoCodeID);
             modelBuilder.Entity<PromoCode>().Property(p => p.Code).IsRequired();
             modelBuilder.Entity<PromoCode>().Property(p => p.Category).IsRequired();
+            modelBuilder.Entity<PromoCode>().Property(p => p.DateCreated).IsRequired();
+            modelBuilder.Entity<PromoCode>().Property(p => p.IsUsed).IsRequired();
         }
     }
 }

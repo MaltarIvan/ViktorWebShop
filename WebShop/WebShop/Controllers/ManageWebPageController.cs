@@ -85,6 +85,18 @@ namespace WebShop.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddNewPromoCode(AddNewPromoCodeVM addNewPromoCodeVM)
+        {
+            if (ModelState.IsValid)
+            {
+                PromoCode promoCode = new PromoCode(addNewPromoCodeVM.Code, addNewPromoCodeVM.Category);
+                await _repository.AddPromoCodeAsync(promoCode);
+                return RedirectToAction("PromoCodes");
+            }
+            return View(addNewPromoCodeVM);
+        }
+
         public async Task<IActionResult> AllOrders()
         {
             List<Order> completedOrders = await _repository.GetAllCompletedOrdersAsync();
@@ -105,6 +117,17 @@ namespace WebShop.Controllers
                 completedOrdersVM.Add(new OrderVM(item));
             }
             return View("Orders", completedOrdersVM);
+        }
+
+        public async Task<IActionResult> PromoCodes()
+        {
+            List<PromoCode> promoCodes = await _repository.GetAllPromoCodesAsync();
+            List<PromoCodeVM> promoCodesVM = new List<PromoCodeVM>();
+            foreach (var item in promoCodes)
+            {
+                promoCodesVM.Add(new PromoCodeVM(item));
+            }
+            return View(promoCodesVM);
         }
     }
 }

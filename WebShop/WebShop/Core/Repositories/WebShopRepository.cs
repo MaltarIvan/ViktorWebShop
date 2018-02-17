@@ -110,13 +110,33 @@ namespace WebShop.Core.Repositories
 
         public async Task<Order> GetOrderAsync(Guid orderID)
         {
-            return await _context.Orders.Include(o => o.ShoppingCart.CartItems.Select(c => c.Product)).SingleOrDefaultAsync(o => o.OrderID == orderID);
+            return await _context.Orders.Include(o => o.ShoppingCart.CartItems.Select(c => c.Product)).Include(o => o.PromoCode).SingleOrDefaultAsync(o => o.OrderID == orderID);
         }
 
         public async Task<Order> UpdateOrderAsync(Order order)
         {
+            /*
             _context.Orders.Attach(order);
             _context.Entry(order).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            */
+            var ord = await _context.Orders.Include(o => o.PromoCode).FirstAsync(o => o.OrderID == order.OrderID);
+            ord.OrderID = order.OrderID;
+            ord.ShoppingCartID = order.ShoppingCartID;
+            ord.ShoppingCart = order.ShoppingCart;
+            ord.Name = order.Name;
+            ord.Surname = order.Surname;
+            ord.StreetAdress1 = order.StreetAdress1;
+            ord.StreetAdress2 = order.StreetAdress2;
+            ord.City = order.City;
+            ord.PostalCode = order.PostalCode;
+            ord.Country = order.Country;
+            ord.Email = order.Email;
+            ord.MobilePhoneNumber = order.MobilePhoneNumber;
+            ord.PhoneNumber = order.PhoneNumber;
+            ord.PromoCode = order.PromoCode;
+            ord.IsCompleted = order.IsCompleted;
+            ord.IsDelivered = order.IsDelivered;
             await _context.SaveChangesAsync();
             return order;
         }
@@ -131,6 +151,43 @@ namespace WebShop.Core.Repositories
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
             return order;
+        }
+
+        public async Task<PromoCode> AddPromoCodeAsync(PromoCode promoCode)
+        {
+            _context.PromoCodes.Add(promoCode);
+            await _context.SaveChangesAsync();
+            return promoCode;
+        }
+
+        public async Task<PromoCode> GetPromoCodeAsync(Guid promoCodeID)
+        {
+            return await _context.PromoCodes.SingleOrDefaultAsync(p => p.PromoCodeID == promoCodeID);
+        }
+
+        public async Task<PromoCode> GetPromoCodeAsync(string code)
+        {
+            return await _context.PromoCodes.SingleOrDefaultAsync(p => p.Code == code);
+        }
+
+        public async Task<PromoCode> UpdatePromoCodeAsync(PromoCode promoCode)
+        {
+            _context.PromoCodes.Attach(promoCode);
+            _context.Entry(promoCode).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return promoCode;
+        }
+
+        public async Task<PromoCode> DeletePromoCodeAsync(PromoCode promoCode)
+        {
+            _context.PromoCodes.Remove(promoCode);
+            await _context.SaveChangesAsync();
+            return promoCode;
+        }
+
+        public async Task<List<PromoCode>> GetAllPromoCodesAsync()
+        {
+            return await _context.PromoCodes.ToListAsync();
         }
     }
 }

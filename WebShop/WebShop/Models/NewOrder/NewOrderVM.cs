@@ -26,6 +26,8 @@ namespace WebShop.Models.NewOrder
         public string MobilePhoneNumber { get; set; }
         public string PhoneNumber { get; set; }
         public string PromoCode { get; set; }
+        public double TotalPrice { get; set; }
+        public double Discount { get; set; }
 
         public NewOrderVM(Order order)
         {
@@ -44,7 +46,19 @@ namespace WebShop.Models.NewOrder
             Email = order.Email;
             MobilePhoneNumber = order.MobilePhoneNumber;
             PhoneNumber = order.PhoneNumber;
-            PromoCode = order.PromoCode;
+            if (order.PromoCode != null)
+            {
+                if (order.PromoCode.IsUsed)
+                {
+                    PromoCode = "Ne Važeći Promo Kod";
+                }
+                else
+                {
+                    PromoCode = order.PromoCode.Code;
+                }
+            }
+            TotalPrice = order.GetTotalPrice();
+            Discount = order.GetDiscount();
         }
     }
 }

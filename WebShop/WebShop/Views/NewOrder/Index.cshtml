@@ -33,7 +33,9 @@
     }
     </tbody>
 </table>
-<p>Ukupno: @Model.ShoppingCartVM.TotalPrice</p>
+<p>Ukupno: @Model.TotalPrice</p>
+<p>Popust: @Model.Discount</p>
+<p>Za platiti: @(Model.TotalPrice - Model.Discount)</p>
 <p>Ime: @Model.Name</p>
 <p>Prezime: @Model.Surname</p>
 <p>Adresa 1: @Model.StreetAdress1</p>

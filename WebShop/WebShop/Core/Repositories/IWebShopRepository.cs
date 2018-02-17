@@ -28,5 +28,12 @@ namespace WebShop.Core.Repositories
         Task<Order> GetOrderAsync(Guid orderID);
         Task<Order> UpdateOrderAsync(Order order);
         Task<Order> DeleteOrderAsync(Order order);
+
+        Task<PromoCode> AddPromoCodeAsync(PromoCode promoCode);
+        Task<PromoCode> GetPromoCodeAsync(Guid promoCodeID);
+        Task<List<PromoCode>> GetAllPromoCodesAsync();
+        Task<PromoCode> GetPromoCodeAsync(string code);
+        Task<PromoCode> UpdatePromoCodeAsync(PromoCode promoCode);
+        Task<PromoCode> DeletePromoCodeAsync(PromoCode promoCode);
     }
 }

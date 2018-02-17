@@ -1,8 +1,28 @@
-﻿
+﻿@using WebShop.Models.ManageWebShop
+@using WebShop.Core
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model AddNewPromoCodeVM
 @{
     ViewData["Title"] = "AddNewPromoCode";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>AddNewPromoCode</h2>
+
+<form asp-action="AddNewPromoCode" method="post">
+    @if (ViewContext.ViewData.ModelState.IsValid == false)
+            {
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                There were some input errors.
+            </div>
+            <div class="panel-body">
+                <div asp-validation-summary="All" class="text-danger"></div>
+            </div>
+        </div>
+    }
+    <label>Kod: </label><input asp-for="Code"/><span asp-validation-for="Code" style="color: red"></span><br />
+    @Html.DropDownListFor(Model => Model.Category, PromoCode.DISCOUNT_TYPE)
+    <input type="submit"/>
+</form>
 

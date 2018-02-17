@@ -48,6 +48,8 @@ namespace WebShop.Controllers
                 ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
                 ShoppingCart shoppingCart = shoppingCartActions.GetShoppingCart();
 
+                PromoCode promoCode = await _repository.GetPromoCodeAsync(addNewOrderVM.PromoCode);
+
                 Core.Order order = new Core.Order
                 {
                     ShoppingCart = shoppingCart,
@@ -64,7 +66,7 @@ namespace WebShop.Controllers
                     Email = addNewOrderVM.Email,
                     MobilePhoneNumber = addNewOrderVM.MobilePhoneNumber,
                     PhoneNumber = addNewOrderVM.PhoneNumber,
-                    PromoCode = addNewOrderVM.PromoCode,
+                    PromoCode = promoCode,
                     IsCompleted = false,
                     IsDelivered = false
                 };
@@ -77,6 +79,11 @@ namespace WebShop.Controllers
         public async Task<IActionResult> ChangeOrderDetails(Guid orderID)
         {
             Order order = await _repository.GetOrderAsync(orderID);
+            string pC = "";
+            if (order.PromoCode != null)
+            {
+                pC = order.PromoCode.Code;
+            }
             ChangeOrderDetailsVM changeOrderDetailsVM = new ChangeOrderDetailsVM
             {
                 OrderID = order.OrderID,
@@ -90,7 +97,7 @@ namespace WebShop.Controllers
                 Email = order.Email,
                 MobilePhoneNumber = order.MobilePhoneNumber,
                 PhoneNumber = order.PhoneNumber,
-                PromoCode = order.PromoCode
+                PromoCode = pC
             };
             return View(changeOrderDetailsVM);
         }
@@ -108,6 +115,8 @@ namespace WebShop.Controllers
                 ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
                 ShoppingCart shoppingCart = shoppingCartActions.GetShoppingCart();
 
+                PromoCode promoCode = await _repository.GetPromoCodeAsync(changeOrderDetailsVM.PromoCode);
+
                 Order order = new Order
                 {
                     ShoppingCart = shoppingCart,
@@ -124,7 +133,7 @@ namespace WebShop.Controllers
                     Email = changeOrderDetailsVM.Email,
                     MobilePhoneNumber = changeOrderDetailsVM.MobilePhoneNumber,
                     PhoneNumber = changeOrderDetailsVM.PhoneNumber,
-                    PromoCode = changeOrderDetailsVM.PromoCode,
+                    PromoCode = promoCode,
                     IsCompleted = false,
                     IsDelivered = false
                 };
@@ -145,6 +154,11 @@ namespace WebShop.Controllers
         {
             Order order = await _repository.GetOrderAsync(orderID);
             order.IsCompleted = true;
+            if (!(order.PromoCode == null))
+            {
+                order.PromoCode.IsUsed = true;
+                await _repository.UpdatePromoCodeAsync(order.PromoCode);
+            }
             await _repository.UpdateOrderAsync(order);
             SendOrderEmailShop(order);
             SendOrderEmailClient(order);
