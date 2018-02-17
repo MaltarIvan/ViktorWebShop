@@ -98,14 +98,13 @@ namespace WebShop.Controllers
 
         public async Task<IActionResult> DeliveredOrders()
         {
-            List<Order> completedOrders = await _repository.GetDeliveredOrdersAsync();
+            List<Order> deliveredOrders = await _repository.GetDeliveredOrdersAsync();
             List<OrderVM> completedOrdersVM = new List<OrderVM>();
-            foreach (var item in completedOrders)
+            foreach (var item in deliveredOrders)
             {
                 completedOrdersVM.Add(new OrderVM(item));
             }
             return View("Orders", completedOrdersVM);
-            return View("Orders");
         }
     }
 }

@@ -9,14 +9,15 @@
 <h2>Naruđbe</h2>
 <div class="row">
     <div class="col-sm-4">
-        <a class="btn btn-primary" asp-action="AllOrders">Sve Naruđbe</a><br />
+        <a class="btn btn-primary" style="width: 100%;" asp-action="AllOrders">Sve Naruđbe</a><br />
     </div>
     <div class="col-sm-4">
-        <a class="btn btn-primary" asp-action="DeliveredOrders">Poslane Naruđbe</a><br />
+        <a class="btn btn-primary" style="width: 100%;" asp-action="DeliveredOrders">Poslane Naruđbe</a><br />
     </div>
 </div>
 @foreach (var item in Model)
 {
+    <hr />
     @Html.Partial("~/Views/ManageWebPage/OrderPartial.cshtml", item)
 }
 
