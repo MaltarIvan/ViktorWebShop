@@ -11,9 +11,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>OrderPartial</title>
-    <head>
-        <link rel="stylesheet" href="~/css/ManageWebPage/orderPartial.css" asp-append-version="true" />
-    </head>
+    <link rel="stylesheet" href="~/css/ManageWebPage/orderPartial.css" asp-append-version="true" />
 </head>
 <body>
     <table class="order-items-table">
@@ -42,13 +40,14 @@
             <p>Ukupno: @Model.ShoppingCartVM.TotalPrice</p>
             <p>Ime: @Model.Name</p>
             <p>Prezime: @Model.Surname</p>
-            <p>Adresa: @Model.StreetAdress</p>
+            <p>Adresa 1: @Model.StreetAdress1</p>
+            <p>Adresa 2: @Model.StreetAdress2</p>
             <p>Grad: @Model.City</p>
             <p>Poštanski broj: @Model.PostalCode</p>
             <p>Država: @Model.Country</p>
             <p>Email: @Model.Email</p>
+            <p>Broj mobitela: @Model.MobilePhoneNumber</p>
             <p>Broj telefona: @Model.PhoneNumber</p>
-            <p>Detalji: @Model.Details</p>
             <p>Promo Code: @Model.PromoCode</p>
         </div>
     </div>

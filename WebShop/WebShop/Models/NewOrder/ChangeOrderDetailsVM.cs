@@ -17,7 +17,10 @@ namespace WebShop.Models.NewOrder
         public string Surname { get; set; }
 
         [Required, MinLength(5)]
-        public string StreetAdress { get; set; }
+        public string StreetAdress1 { get; set; }
+
+        [MinLength(5)]
+        public string StreetAdress2 { get; set; }
 
         [Required, MinLength(5)]
         public string City { get; set; }
@@ -32,7 +35,9 @@ namespace WebShop.Models.NewOrder
         [DataType(DataType.EmailAddress, ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Telephone Number Required")]
+        // [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
+        public string MobilePhoneNumber { get; set; }
+
         // [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         public string PhoneNumber { get; set; }
 

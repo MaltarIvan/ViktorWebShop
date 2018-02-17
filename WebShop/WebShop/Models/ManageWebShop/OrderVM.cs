@@ -17,11 +17,13 @@ namespace WebShop.Models.ManageWebShop
         public DateTime DateCreated { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string StreetAdress { get; set; }
+        public string StreetAdress1 { get; set; }
+        public string StreetAdress2 { get; set; }
         public string City { get; set; }
         public int PostalCode { get; set; }
         public string Country { get; set; }
         public string Email { get; set; }
+        public string MobilePhoneNumber { get; set; }
         public string PhoneNumber { get; set; }
         public string Details { get; set; }
         public string PromoCode { get; set; }
@@ -37,16 +39,17 @@ namespace WebShop.Models.ManageWebShop
             DateCreated = order.DateCreated;
             Name = order.Name;
             Surname = order.Surname;
-            StreetAdress = order.StreetAdress;
+            StreetAdress1 = order.StreetAdress1;
+            StreetAdress2 = order.StreetAdress2;
             City = order.City;
             PostalCode = order.PostalCode;
             Country = order.Country;
             Email = order.Email;
+            MobilePhoneNumber = order.MobilePhoneNumber;
             PhoneNumber = order.PhoneNumber;
-            Details = order.Details;
             PromoCode = order.PromoCode;
-            Completed = order.Completed;
-            Delivered = order.Delivered;
+            Completed = order.IsCompleted;
+            Delivered = order.IsDelivered;
         }
     }
 }

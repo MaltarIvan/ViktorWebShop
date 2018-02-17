@@ -72,7 +72,7 @@ namespace WebShop.Controllers
                     {
                         await file.CopyToAsync(fileStream);
                     }
-                    Product product = new Product(addNewProductVM.Name, addNewProductVM.Description, Convert.ToDouble(priceDec), fileName, addNewProductVM.Quantity);
+                    Product product = new Product(addNewProductVM.Name, addNewProductVM.Description, Convert.ToDouble(priceDec), fileName);
                     await _repository.AddProductAsync(product);
                     return RedirectToAction("Index");
                 }

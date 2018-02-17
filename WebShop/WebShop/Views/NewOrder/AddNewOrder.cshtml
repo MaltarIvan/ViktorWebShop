@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Ispunito vaše podatke</h2>
+<h2>Ispunite vaše podatke</h2>
 
 <form asp-action="AddNewOrder", method="post">
     @if (ViewContext.ViewData.ModelState.IsValid == false)
@@ -20,13 +20,18 @@
             </div>
         </div>
     }
-    <label>Ime: </label><input asp-for="Name"/><span asp-validation-for="Name" style="color:red"></span><br />
-    <label>Prezime: </label><input asp-for="Surname" /><span asp-validation-for="Surname" style="color:red"></span><br />
-    <label>Adresa: </label><input asp-for="StreetAdress" /><span asp-validation-for="StreetAdress" style="color:red"></span><br />
-    <label>Grad: </label><input asp-for="City" /><span asp-validation-for="City" style="color:red"></span><br />
-    <label>Poštanski broj: : </label><input asp-for="PostalCode" /><span asp-validation-for="PostalCode" style="color:red"></span><br />
-    <label>Država: </label><input asp-for="Country" /><span asp-validation-for="Country" style="color:red"></span><br />
-    <label>Email: </label><input asp-for="Email" type="email" /><span asp-validation-for="Email" style="color:red"></span><br />
+    <p>Polja označena sa <span style="color: red;">*</span> su obavezna.</p>
+    <p>Obavezno je napisati broj mobitela ili broj telefona.</p>
+    <label>Ime: <span style="color: red;">*</span></label><input asp-for="Name"/><span asp-validation-for="Name" style="color:red"></span><br />
+    <label>Prezime: <span style="color: red;">*</span></label><input asp-for="Surname" /><span asp-validation-for="Surname" style="color:red"></span><br />
+    <label>Adresa 1: <span style="color: red;">*</span></label><input asp-for="StreetAdress1" /><span asp-validation-for="StreetAdress1" style="color:red"></span><br />
+    <label>Adresa 2 (optional): </label><input asp-for="StreetAdress2" /><span asp-validation-for="StreetAdress2" style="color:red"></span><br />
+    <label>Grad: <span style="color: red;">*</span></label><input asp-for="City" /><span asp-validation-for="City" style="color:red"></span><br />
+    <label>Poštanski broj: <span style="color: red;">*</span></label><input asp-for="PostalCode" /><span asp-validation-for="PostalCode" style="color:red"></span><br />
+    <label>Država: <span style="color: red;">*</span></label><input asp-for="Country" /><span asp-validation-for="Country" style="color:red"></span><br />
+    <label>Email: <span style="color: red;">*</span></label><input asp-for="Email" type="email" /><span asp-validation-for="Email" style="color:red"></span><br />
+    <span style="color: red;">*</span><br />
+    <label>Broj mobitela: </label><input asp-for="MobilePhoneNumber" /><span asp-validation-for="MobilePhoneNumber" style="color:red"></span><br />
     <label>Broj telefona: </label><input asp-for="PhoneNumber" /><span asp-validation-for="PhoneNumber" style="color:red"></span><br />
     <label>Detalji: </label><input asp-for="Details" /><span asp-validation-for="Details" style="color:red"></span><br />
     <label>Promotivni kod: </label><input asp-for="PromoCode" /><span asp-validation-for="PromoCode" style="color:red"></span><br />

@@ -24,7 +24,6 @@ namespace WebShop.Models.WebShop
             Description = product.Description;
             Price = product.Price;
             ImageName = product.ImageName;
-            Quantity = product.Quantity;
         }
     }
 }

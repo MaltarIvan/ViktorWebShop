@@ -40,6 +40,11 @@ namespace WebShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (addNewOrderVM.MobilePhoneNumber == null && addNewOrderVM.PhoneNumber == null)
+                {
+                    ModelState.AddModelError("CustomError", "Please provide mobile phone number or telephone number.");
+                    return View();
+                }
                 ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
                 ShoppingCart shoppingCart = shoppingCartActions.GetShoppingCart();
 
@@ -51,16 +56,17 @@ namespace WebShop.Controllers
                     DateCreated = DateTime.Now,
                     Name = addNewOrderVM.Name,
                     Surname = addNewOrderVM.Surname,
-                    StreetAdress = addNewOrderVM.StreetAdress,
+                    StreetAdress1 = addNewOrderVM.StreetAdress1,
+                    StreetAdress2 = addNewOrderVM.StreetAdress2,
                     City = addNewOrderVM.City,
                     PostalCode = addNewOrderVM.PostalCode,
                     Country = addNewOrderVM.Country,
                     Email = addNewOrderVM.Email,
+                    MobilePhoneNumber = addNewOrderVM.MobilePhoneNumber,
                     PhoneNumber = addNewOrderVM.PhoneNumber,
-                    Details = addNewOrderVM.Details,
                     PromoCode = addNewOrderVM.PromoCode,
-                    Completed = false,
-                    Delivered = false
+                    IsCompleted = false,
+                    IsDelivered = false
                 };
                 await _repository.AddOrderAsync(order);
                 return RedirectToAction("Index", new { orderID = order.OrderID});
@@ -76,13 +82,14 @@ namespace WebShop.Controllers
                 OrderID = order.OrderID,
                 Name = order.Name,
                 Surname = order.Surname,
-                StreetAdress = order.StreetAdress,
+                StreetAdress1 = order.StreetAdress1,
+                StreetAdress2 = order.StreetAdress2,
                 City = order.City,
                 PostalCode = order.PostalCode,
                 Country = order.Country,
                 Email = order.Email,
+                MobilePhoneNumber = order.MobilePhoneNumber,
                 PhoneNumber = order.PhoneNumber,
-                Details = order.Details,
                 PromoCode = order.PromoCode
             };
             return View(changeOrderDetailsVM);
@@ -93,6 +100,11 @@ namespace WebShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (changeOrderDetailsVM.MobilePhoneNumber == null && changeOrderDetailsVM.PhoneNumber == null)
+                {
+                    ModelState.AddModelError("CustomError", "Please provide mobile phone number or telephone number.");
+                    return View();
+                }
                 ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
                 ShoppingCart shoppingCart = shoppingCartActions.GetShoppingCart();
 
@@ -104,16 +116,17 @@ namespace WebShop.Controllers
                     DateCreated = DateTime.Now,
                     Name = changeOrderDetailsVM.Name,
                     Surname = changeOrderDetailsVM.Surname,
-                    StreetAdress = changeOrderDetailsVM.StreetAdress,
+                    StreetAdress1 = changeOrderDetailsVM.StreetAdress1,
+                    StreetAdress2 = changeOrderDetailsVM.StreetAdress2,
                     City = changeOrderDetailsVM.City,
                     PostalCode = changeOrderDetailsVM.PostalCode,
                     Country = changeOrderDetailsVM.Country,
                     Email = changeOrderDetailsVM.Email,
+                    MobilePhoneNumber = changeOrderDetailsVM.MobilePhoneNumber,
                     PhoneNumber = changeOrderDetailsVM.PhoneNumber,
-                    Details = changeOrderDetailsVM.Details,
                     PromoCode = changeOrderDetailsVM.PromoCode,
-                    Completed = false,
-                    Delivered = false
+                    IsCompleted = false,
+                    IsDelivered = false
                 };
                 await _repository.UpdateOrderAsync(order);
                 return RedirectToAction("Index", new { orderID = order.OrderID });
@@ -131,7 +144,7 @@ namespace WebShop.Controllers
         public async Task<IActionResult> CompleteOrder(Guid orderID)
         {
             Order order = await _repository.GetOrderAsync(orderID);
-            order.Completed = true;
+            order.IsCompleted = true;
             await _repository.UpdateOrderAsync(order);
             SendOrderEmailShop(order);
             SendOrderEmailClient(order);

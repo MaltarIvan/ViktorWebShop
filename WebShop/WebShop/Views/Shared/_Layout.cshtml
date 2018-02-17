@@ -17,26 +17,11 @@
     </environment>
     <link rel="stylesheet" href="~/css/layout.css" />
 </head>
-<body>
+<body style="padding-top: 160px;">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="row" style="background-color: white">
             <div class="col-sm-6">
-                <img src="~/images/logo.jpg" style="width: 60%; height: auto;" />
-            </div>
-            <div class="col-sm-3">
-            </div>
-            <div class="col-sm-3">
-                <div class="row" style="padding:30px;">
-                    <div class="col-sm-4">
-                        <a href="#"><img src="~/images/facebook.png" style="width: 50px; height: auto;" /></a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="#"><img src="~/images/instagram.png" style="width: 50px; height: auto;" /></a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="#"><img src="~/images/twitter-logo-blue.png" style="width: 50px; height: auto;" /></a>
-                    </div>
-                </div>
+                <img src="~/images/logo.jpg"  style="height: 100px; width: auto;"/>
             </div>
         </div>
         <div class="container">
@@ -89,13 +74,32 @@
         -->
     <div class="container body-content">
         @RenderBody()
-        <!--
-        <hr />
-        <footer>
-            <p>&copy; 2018 - WebShop</p>
-        </footer>
-            -->
     </div>
+    <hr />
+    <footer>
+        <div class="row" style="padding-left: 48px;">
+            <div class="col-sm-6">
+                <p>&copy; 2018 - WebShop</p>
+            </div>
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-2">
+                <div class="row" style="padding:30px;">
+                    <div class="col-sm-4">
+                        <a href="#"><img src="~/images/facebook.png" style="width: 50px; height: auto;" /></a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="#"><img src="~/images/instagram.png" style="width: 50px; height: auto;" /></a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="#"><img src="~/images/twitter-logo-blue.png" style="width: 50px; height: auto;" /></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
+    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

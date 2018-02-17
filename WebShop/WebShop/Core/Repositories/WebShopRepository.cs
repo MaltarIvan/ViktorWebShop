@@ -105,7 +105,7 @@ namespace WebShop.Core.Repositories
 
         public async Task<List<Order>> GetAllCompletedOrdersAsync()
         {
-            return await _context.Orders.Include(o => o.ShoppingCart.CartItems.Select(c => c.Product)).Where(o => o.Completed).ToListAsync();
+            return await _context.Orders.Include(o => o.ShoppingCart.CartItems.Select(c => c.Product)).Where(o => o.IsCompleted).ToListAsync();
         }
 
         public async Task<Order> GetOrderAsync(Guid orderID)
@@ -123,7 +123,7 @@ namespace WebShop.Core.Repositories
 
         public async Task<List<Order>> GetDeliveredOrdersAsync()
         {
-            return await _context.Orders.Include(o => o.ShoppingCart.CartItems.Select(c => c.Product)).Where(o => o.Delivered).ToListAsync();
+            return await _context.Orders.Include(o => o.ShoppingCart.CartItems.Select(c => c.Product)).Where(o => o.IsDelivered).ToListAsync();
         }
 
         public async Task<Order> DeleteOrderAsync(Order order)

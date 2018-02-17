@@ -15,18 +15,19 @@ namespace WebShop.Core
         public ShoppingCart ShoppingCart { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string StreetAdress { get; set; }
+        public string StreetAdress1 { get; set; }
+        public string StreetAdress2 { get; set; }
         public string City { get; set; }
         public int PostalCode { get; set; }
         public string Country { get; set; }
         public string Email { get; set; }
+        public string MobilePhoneNumber { get; set; }
         public string PhoneNumber { get; set; }
-        public string Details { get; set; }
         public string PromoCode { get; set; }
-        public bool Completed { get; set; }
-        public bool Delivered { get; set; }
+        public bool IsCompleted { get; set; }
+        public bool IsDelivered { get; set; }
 
-        public Order(ShoppingCart shoppingCart, string name, string surname, string streetAdress, string city, int postalCode, string country, string email, string phoneNumber, string details, string promoCode)
+        public Order(ShoppingCart shoppingCart, string name, string surname, string streetAdress1, string streetAdress2, string city, int postalCode, string country, string email, string mobilePhoneNumber, string phoneNumber, string promoCode)
         {
             OrderID = Guid.NewGuid();
             DateCreated = DateTime.Now;
@@ -34,14 +35,15 @@ namespace WebShop.Core
             ShoppingCart = shoppingCart;
             Name = name;
             Surname = surname;
-            StreetAdress = streetAdress;
+            StreetAdress1 = streetAdress1;
+            StreetAdress2 = streetAdress2;
             City = city;
             Email = email;
+            MobilePhoneNumber = mobilePhoneNumber;
             PhoneNumber = phoneNumber;
-            Details = details;
             PromoCode = promoCode;
-            Completed = false;
-            Delivered = false;
+            IsCompleted = false;
+            IsDelivered = false;
         }
 
         public Order()
@@ -72,13 +74,14 @@ namespace WebShop.Core
                 "<br/><b>Datum:</b> " + this.DateCreated +
                 "<br/><b>Ime:</b> " + Name +
                 "<br/><b>Prezime:</b> " + Surname +
-                "<br/><b>Adresa:</b> " + StreetAdress +
+                "<br/><b>Adresa 1:</b> " + StreetAdress1 +
+                "<br/><b>Adresa 2:</b> " + StreetAdress2 +
                 "<br/><b>Grad:</b> " + City +
                 "<br/><b>Poštanski broj:</b> " + PostalCode +
                 "<br/><b>Država:</b> " + Country +
                 "<br/><b>Email:</b> " + Email +
+                "<br/><b>Broj mobitela:</b> " + MobilePhoneNumber +
                 "<br/><b>Broj telefona:</b> " + PhoneNumber +
-                "<br/><b>Detalji:</b> " + Details +
                 "<br/><b>Promo Kod:</b> " + PromoCode;
             
             return str;

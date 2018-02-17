@@ -15,9 +15,8 @@ namespace WebShop.Core
         public string Description { get; set; }
         public double Price { get; set; }
         public string ImageName { get; set; }
-        public int Quantity { get; set; }
 
-        public Product(string name, string description, double price, string imageName, int quantity)
+        public Product(string name, string description, double price, string imageName)
         {
             ProductID = Guid.NewGuid();
             Name = name;
@@ -25,7 +24,6 @@ namespace WebShop.Core
             Description = description;
             Price = price;
             ImageName = imageName;
-            Quantity = quantity;
         }
 
         public Product()
