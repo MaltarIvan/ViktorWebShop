@@ -15,9 +15,30 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <link rel="stylesheet" href="~/css/layout.css" />
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="row" style="background-color: white">
+            <div class="col-sm-6">
+                <img src="~/images/logo.jpg" style="width: 60%; height: auto;" />
+            </div>
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-3">
+                <div class="row" style="padding:30px;">
+                    <div class="col-sm-4">
+                        <a href="#"><img src="~/images/facebook.png" style="width: 50px; height: auto;" /></a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="#"><img src="~/images/instagram.png" style="width: 50px; height: auto;" /></a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="#"><img src="~/images/twitter-logo-blue.png" style="width: 50px; height: auto;" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -36,7 +57,8 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Gallery">Galerija</a></li>
                     <li><a asp-area="" asp-controller="WebShop" asp-action="Index">Trgovina</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Zdravlje<span class="caret"></span>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Zdravlje<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Imunitet</a></li>
@@ -53,9 +75,9 @@
             </div>
         </div>
     </nav>
-    <header style="text-align: center">
-        <img src="~/images/header.png" style="width: 60%; height: auto;" />
-    </header>
+
+
+   
     <!--
     <nav>
         <ul>
