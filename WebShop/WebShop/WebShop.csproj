@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Content\slide_show\" />
     <Folder Include="wwwroot\Content\products\" />
   </ItemGroup>
 
