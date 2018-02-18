@@ -1,4 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "About";
+    ViewData["Title"] = "O nama";
 }
+<head>
+    <link rel="stylesheet" href="~/css/Home/about.css" />
+</head>
+
 @Html.Partial("~/wwwroot/Html/About/about.html")
+
+@section Scripts {
+    <script src="~/js/Home/about.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&libraries=places&key=AIzaSyCbFkv6pZI46Fo5hJQcHxMNQf113LcO6-s"></script>
+}

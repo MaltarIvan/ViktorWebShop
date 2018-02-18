@@ -154,14 +154,21 @@ namespace WebShop.Controllers
         {
             Order order = await _repository.GetOrderAsync(orderID);
             order.IsCompleted = true;
-            if (!(order.PromoCode == null))
+            await _repository.UpdateOrderAsync(order);
+            if (order.PromoCode != null)
+            {
+                if (order.PromoCode.IsUsed)
+                {
+                    order.PromoCode = null;
+                }
+            }
+            SendOrderEmailShop(order);
+            SendOrderEmailClient(order);
+            if (order.PromoCode != null)
             {
                 order.PromoCode.IsUsed = true;
                 await _repository.UpdatePromoCodeAsync(order.PromoCode);
             }
-            await _repository.UpdateOrderAsync(order);
-            SendOrderEmailShop(order);
-            SendOrderEmailClient(order);
             return RedirectToAction("Index", "WebShop");
         }
 

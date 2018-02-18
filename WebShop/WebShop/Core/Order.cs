@@ -84,7 +84,7 @@ namespace WebShop.Core
                 "<br/><b>Email:</b> " + Email +
                 "<br/><b>Broj mobitela:</b> " + MobilePhoneNumber +
                 "<br/><b>Broj telefona:</b> " + PhoneNumber +
-                "<br/><b>Promo Kod:</b> " + PromoCode;
+                "<br/><b>Promo Kod:</b> " + PromoCode.Code;
             
             return str;
         }
