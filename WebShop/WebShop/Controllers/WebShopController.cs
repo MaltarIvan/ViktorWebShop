@@ -39,6 +39,13 @@ namespace WebShop.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> RemoveProductFromCart(Guid cartItemID)
+        {
+            ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
+            await shoppingCartActions.RemoveCartItem(cartItemID);
+            return RedirectToAction("ShoppingCart");
+        }
+
         public IActionResult ShoppingCart()
         {
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);

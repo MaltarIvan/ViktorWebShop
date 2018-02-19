@@ -21,6 +21,7 @@ namespace WebShop.Core.Repositories
         Task<CartItem> AddCartItemAsync(CartItem cartItem);
         Task<CartItem> GetCartItemAsync(Guid cartItemID);
         Task<CartItem> UpdateCartItemAsync(CartItem cartItem);
+        Task<CartItem> RemoveCartItem(Guid cartItemID);
 
         Task<Order> AddOrderAsync(Order order);
         Task<List<Order>> GetAllCompletedOrdersAsync();

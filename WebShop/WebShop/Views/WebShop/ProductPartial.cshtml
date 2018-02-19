@@ -17,7 +17,11 @@
         <p>@Model.Description</p>
         <p><span>Cijena: </span>@Model.Price</p>
         <img style="height: 100px; width: 100px;" src="~/Content/products/@Model.ImageName" /><br />
-        <a asp-controller="WebShop" asp-action="AddProductToCart" asp-route-productID="@Model.ProductID">Add to cart</a>
+        <a asp-action="AddProductToCart" asp-route-productID="@Model.ProductID">Dodaj proizvod u košaricu</a><br />
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-controller="ManageWebPage" asp-action="RemoveProduct" asp-route-productID="@Model.ProductID">Makni proizvod iz ponude</a>
+        }
     </div>
     <hr />
 </body>

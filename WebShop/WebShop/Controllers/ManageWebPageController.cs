@@ -129,5 +129,11 @@ namespace WebShop.Controllers
             }
             return View(promoCodesVM);
         }
+
+        public async Task<IActionResult> RemoveProduct(Guid productID)
+        {
+            await _repository.DeleteProductAsync(productID);
+            return RedirectToAction("Index", "WebShop");
+        }
     }
 }

@@ -54,6 +54,11 @@ namespace WebShop.Utilities
             }
         }
 
+        internal async Task RemoveCartItem(Guid cartItemID)
+        {
+            await _repository.RemoveCartItem(cartItemID);
+        }
+
         internal ShoppingCart GetShoppingCart()
         {
             return _shoppingCart;
