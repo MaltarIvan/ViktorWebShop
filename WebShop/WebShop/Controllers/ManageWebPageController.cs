@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebShop.Models.ManageWebShop;
+using WebShop.Models.ManageWebPage;
 using System.IO;
 using WebShop.Core.Repositories;
 using Microsoft.AspNetCore.Hosting;
@@ -134,6 +134,53 @@ namespace WebShop.Controllers
         {
             await _repository.DeleteProductAsync(productID);
             return RedirectToAction("Index", "WebShop");
+        }
+
+        public IActionResult AddPictureToGallery()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPictureToGallery(AddPictureVM addPictureVM)
+        {
+            var validImageTypes = new string[]
+            {
+                    "image/gif",
+                    "image/jpeg",
+                    "image/pjpeg",
+                    "image/png"
+            };
+            if (ModelState.IsValid)
+            {
+                if (!validImageTypes.Contains(addPictureVM.Image.ContentType))
+                {
+                    ModelState.AddModelError("CustomError", "Please choose either a GIF, JPG or PNG image.");
+                    addPictureVM.Image = null;
+                    return View(addPictureVM);
+                }
+                else
+                {
+                    var file = addPictureVM.Image;
+                    var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Content\\gallery");
+                    string fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                    string path = Path.Combine(uploads, fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+                    Picture picture = new Picture(addPictureVM.Description, fileName);
+                    await _repository.AddPictureAsync(picture);
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(addPictureVM);
+        }
+
+        public async Task<IActionResult> DeletePictureFromGallery(Guid pictureID)
+        {
+            await _repository.DeletePictureAsync(pictureID);
+            return RedirectToAction("Gallery", "Home");
         }
     }
 }

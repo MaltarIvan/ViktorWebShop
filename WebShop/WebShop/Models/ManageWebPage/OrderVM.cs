@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WebShop.Core;
 using WebShop.Models.Shared;
 
-namespace WebShop.Models.ManageWebShop
+namespace WebShop.Models.ManageWebPage
 {
     public class OrderVM
     {

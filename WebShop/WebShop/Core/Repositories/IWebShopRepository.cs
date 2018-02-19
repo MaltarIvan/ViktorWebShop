@@ -36,5 +36,10 @@ namespace WebShop.Core.Repositories
         Task<PromoCode> GetPromoCodeAsync(string code);
         Task<PromoCode> UpdatePromoCodeAsync(PromoCode promoCode);
         Task<PromoCode> DeletePromoCodeAsync(PromoCode promoCode);
+
+        Task<Picture> AddPictureAsync(Picture picture);
+        Task<Picture> GetPictureAsync(Guid pictureID);
+        Task<List<Picture>> GetAllPicturesAsync();
+        Task<Picture> DeletePictureAsync(Guid pictureID);
     }
 }

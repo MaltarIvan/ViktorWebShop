@@ -197,5 +197,30 @@ namespace WebShop.Core.Repositories
         {
             return await _context.PromoCodes.ToListAsync();
         }
+
+        public async Task<Picture> AddPictureAsync(Picture picture)
+        {
+            _context.Pictures.Add(picture);
+            await _context.SaveChangesAsync();
+            return picture;
+        }
+
+        public async Task<Picture> GetPictureAsync(Guid pictureID)
+        {
+            return await _context.Pictures.FirstOrDefaultAsync(p => p.PictureID == pictureID);
+        }
+
+        public async Task<List<Picture>> GetAllPicturesAsync()
+        {
+            return await _context.Pictures.OrderBy(p => p.DateAdded).ToListAsync();
+        }
+
+        public async Task<Picture> DeletePictureAsync(Guid pictureID)
+        {
+            Picture picture = await GetPictureAsync(pictureID);
+            _context.Pictures.Remove(picture);
+            await _context.SaveChangesAsync();
+            return picture;
+        }
     }
 }

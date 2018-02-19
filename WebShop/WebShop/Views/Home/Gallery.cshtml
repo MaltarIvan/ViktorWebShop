@@ -1,4 +1,6 @@
-﻿
+﻿@using WebShop.Models.Home
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<PictureVM>
 @{
     ViewData["Title"] = "Gallery";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,3 +8,11 @@
 
 <h2>Gallery</h2>
 
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+            @Html.Partial("~/Views/Home/PicturePartial.cshtml", item)
+        </div>
+    }
+</div>

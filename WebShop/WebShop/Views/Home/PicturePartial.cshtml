@@ -1,0 +1,21 @@
+﻿@using WebShop.Models.Home
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model PictureVM
+    @{
+        Layout = null;
+    }
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>PicturePartial</title>
+    </head>
+    <body>
+        <img style="height: auto; width: 100%" src="~/Content/gallery/@Model.ImageName" /><br />
+        <p>@Model.Description</p>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-controller="ManageWebPage" asp-action="DeletePictureFromGallery" asp-route-pictureID="@Model.PictureID">Izbriši sliku</a>
+        }
+    </body>
+</html>

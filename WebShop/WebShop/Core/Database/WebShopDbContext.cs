@@ -17,6 +17,7 @@ namespace WebShop.Core.Database
         public IDbSet<CartItem> CartItems { get; set; }
         public IDbSet<Order> Orders { get; set; }
         public IDbSet<PromoCode> PromoCodes { get; set; }
+        public IDbSet<Picture> Pictures { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -65,6 +66,11 @@ namespace WebShop.Core.Database
             modelBuilder.Entity<PromoCode>().Property(p => p.Category).IsRequired();
             modelBuilder.Entity<PromoCode>().Property(p => p.DateCreated).IsRequired();
             modelBuilder.Entity<PromoCode>().Property(p => p.IsUsed).IsRequired();
+
+            modelBuilder.Entity<Picture>().HasKey(p => p.PictureID);
+            modelBuilder.Entity<Picture>().Property(p => p.DateAdded).IsRequired();
+            modelBuilder.Entity<Picture>().Property(p => p.Description).IsRequired();
+            modelBuilder.Entity<Picture>().Property(p => p.ImageName).IsRequired();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebShop.Core;
 
-namespace WebShop.Models.ManageWebShop
+namespace WebShop.Models.ManageWebPage
 {
     public class PromoCodeVM
     {
