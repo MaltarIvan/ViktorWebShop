@@ -26,9 +26,14 @@ namespace WebShop.Controllers
 
         public async Task<IActionResult> Index()
         {
+            ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
             List<Product> products = await _repository.GetAllProductsAsync();
-            WebShopVM webShopVM = new WebShopVM(products);
-            // ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
+            List<ProductVM> productsVM = new List<ProductVM>();
+            foreach (var item in products)
+            {
+                productsVM.Add(new ProductVM(item, shoppingCartActions.Contains(item)));
+            }
+            WebShopVM webShopVM = new WebShopVM(productsVM);
             return View(webShopVM);
         }
         
@@ -46,7 +51,11 @@ namespace WebShop.Controllers
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
             int productCount = await shoppingCartActions.RemoveCartItem(cartItemID);
             double totalPrice = shoppingCartActions.TotalPrice();
-            double cartItemPrice = shoppingCartActions.CartItemPrice(cartItemID);
+            double cartItemPrice = 0;
+            if (productCount != 0)
+            {
+                cartItemPrice = shoppingCartActions.CartItemPrice(cartItemID);
+            }
             return Json(new { TotalPrice = totalPrice, CartItemPrice = cartItemPrice, ProductCount = productCount });
         }
 
@@ -54,7 +63,7 @@ namespace WebShop.Controllers
         {
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
             await shoppingCartActions.DeleteCartItem(cartItemID);
-            return Json("Success");
+            return Json(shoppingCartActions.TotalPrice());
         }
 
         public IActionResult ShoppingCart()

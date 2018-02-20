@@ -10,13 +10,9 @@ namespace WebShop.Models.WebShop
     {
         public List<ProductVM> ProductsVM;
 
-        public WebShopVM(List<Product> products)
+        public WebShopVM(List<ProductVM> productsVM)
         {
-            ProductsVM = new List<ProductVM>();
-            foreach (var item in products)
-            {
-                ProductsVM.Add(new ProductVM(item));
-            }
+            ProductsVM = productsVM;
         }
     }
 }

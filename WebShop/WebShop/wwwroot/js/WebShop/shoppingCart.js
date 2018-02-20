@@ -7,8 +7,8 @@
         },
         success: function (result) {
             $("#" + cartItemID + "quantity").text(result.productCount);
-            $("#total-price").text(result.totalPrice);
-            $("#" + cartItemID + "cart-item-price").text(result.cartItemPrice);
+            $("#total-price").text(result.totalPrice.toFixed(2));
+            $("#" + cartItemID + "cart-item-price").text(result.cartItemPrice.toFixed(2));
         }
     });
 }
@@ -24,9 +24,14 @@ function removeProduct(cartItemID) {
             if (result.productCount === 0) {
                 $("#" + cartItemID).remove();
             }
+            var count = $(".cart-item").length;
+            if (count <= 0) {
+                $("#cart-details").hide();
+                $("#cart-empty").show();
+            }
             $("#" + cartItemID + "quantity").text(result.productCount);
-            $("#total-price").text(result.totalPrice);
-            $("#" + cartItemID + "cart-item-price").text(result.cartItemPrice);
+            $("#total-price").text(result.totalPrice.toFixed(2));
+            $("#" + cartItemID + "cart-item-price").text(result.cartItemPrice.toFixed(2));
         }
     });
 }
@@ -38,8 +43,14 @@ function deleteProduct(cartItemID) {
         data: {
             'cartItemID': cartItemID
         },
-        success: function (result) {
+        success: function (totalPrice) {
             $("#" + cartItemID).remove();
+            $("#total-price").text(totalPrice.toFixed(2));
+            var count = $(".cart-item").length;
+            if (count <= 0) {
+                $("#cart-details").hide();
+                $("#cart-empty").show();
+            }
         }
     });
 }

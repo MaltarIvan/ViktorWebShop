@@ -38,6 +38,11 @@ namespace WebShop.Utilities
             }
         }
 
+        public bool Contains(Product product)
+        {
+            return _shoppingCart.CartItems.Any(c => c.ProductID == product.ProductID);
+        }
+
         public double TotalPrice()
         {
             return _shoppingCart.TotalPrice;

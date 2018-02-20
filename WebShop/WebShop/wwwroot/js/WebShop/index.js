@@ -7,6 +7,7 @@
         },
         success: function (productCount) {
             console.log(productCount);
+            $("#" + productID + "is-in-cart").show();
         }
     });
 }

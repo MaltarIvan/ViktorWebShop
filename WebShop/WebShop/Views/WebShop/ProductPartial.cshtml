@@ -17,7 +17,22 @@
         <p>@Model.Description</p>
         <p><span>Cijena: </span>@Model.Price</p>
         <img style="height: 100px; width: 100px;" src="~/Content/products/@Model.ImageName" /><br />
-        <button id="addButton" onclick="addProduct('@Model.ProductID')">Dodaj proizvod u košaricu</button>
+        <div class="row">
+            <div class="col-sm-6">
+                <button id="addButton" onclick="addProduct('@Model.ProductID')">Dodaj proizvod u košaricu</button>
+            </div>
+            <div class="col-sm-6">
+                @if (Model.IsInCart)
+                {
+                    <div>
+                        <p class="glyphicon glyphicon-check">Proizvod je u košarici!</p>
+                    </div>
+                }
+                <div id="@(Model.ProductID + "is-in-cart")" hidden>
+                    <p class="glyphicon glyphicon-check">Proizvod je u košarici!</p>
+                </div>
+            </div>
+        </div>
         @if (User.IsInRole("Admin"))
         {
             <a asp-controller="ManageWebPage" asp-action="RemoveProduct" asp-route-productID="@Model.ProductID">Makni proizvod iz ponude</a>

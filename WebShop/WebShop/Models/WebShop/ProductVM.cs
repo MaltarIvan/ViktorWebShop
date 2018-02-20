@@ -15,8 +15,9 @@ namespace WebShop.Models.WebShop
         public double Price;
         public string ImageName;
         public int Quantity;
+        public bool IsInCart;
 
-        public ProductVM(Product product)
+        public ProductVM(Product product, bool isInCart)
         {
             ProductID = product.ProductID;
             Name = product.Name;
@@ -24,6 +25,7 @@ namespace WebShop.Models.WebShop
             Description = product.Description;
             Price = product.Price;
             ImageName = product.ImageName;
+            IsInCart = isInCart;
         }
     }
 }
