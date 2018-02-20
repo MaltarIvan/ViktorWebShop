@@ -57,5 +57,10 @@ namespace WebShop.Controllers
             }
             return View(picturesVM);
         }
+
+        public IActionResult Health()
+        {
+            return View();
+        }
     }
 }
