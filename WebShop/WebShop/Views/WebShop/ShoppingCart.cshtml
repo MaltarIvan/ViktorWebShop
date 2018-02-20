@@ -9,15 +9,16 @@
 <h2>ShoppingCart</h2>
 @if (Model.CartItemsVM.Count > 0)
 {
-    <label>Ukupno: </label><p>@Model.TotalPrice kn</p>
+    <label>Ukupno: </label><p id="total-price">@Model.TotalPrice kn</p>
 
     <div>
-        <a asp-controller="NewOrder" asp-action="AddNewOrder">Naruči</a>
+        <a asp-controller="NewOrder" asp-action="AddNewOrder">Naruči</a><br />
+        <a asp-action="Index">Dodaj još proizvoda u košaricu</a>
     </div>
 
     @foreach (var item in Model.CartItemsVM)
     {
-        <div class="col-sm-6">
+        <div id="@item.CartItemID" class="col-sm-6">
             @Html.Partial("~/Views/WebShop/CartItemPartial.cshtml", item)
         </div>
     }
@@ -26,4 +27,6 @@ else
 {
     <p><b>Košarica je prazna!</b></p>
 }
-<a asp-action="Index">Dodaj još proizvoda u košaricu</a>
+@section Scripts {
+    <script src="~/js/WebPage/shoppingCart.js"></script>
+}

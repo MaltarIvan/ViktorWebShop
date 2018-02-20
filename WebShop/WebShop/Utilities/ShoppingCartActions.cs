@@ -38,7 +38,18 @@ namespace WebShop.Utilities
             }
         }
 
-        public async Task AddProductAsync(Guid productID)
+        public double TotalPrice()
+        {
+            return _shoppingCart.TotalPrice;
+        }
+
+        public double CartItemPrice(Guid productID)
+        {
+            CartItem cartItem = _shoppingCart.CartItems.First(c => c.ProductID == productID || c.CartItemID == productID);
+            return cartItem.Quantity * cartItem.PricePerItem;
+        }
+
+        public async Task<int> AddProductAsync(Guid productID)
         {
             CartItem cartItem = _shoppingCart.CartItems.FirstOrDefault(c => c.ProductID == productID);
             if (cartItem == null)
@@ -46,15 +57,33 @@ namespace WebShop.Utilities
                 Product product = await _repository.GetProductAsync(productID);
                 cartItem = new CartItem(_shoppingCart, product, 1);
                 await _repository.AddCartItemAsync(cartItem);
+                return 1;
             }
             else
             {
                 cartItem.Quantity++;
                 await _repository.UpdateCartItemAsync(cartItem);
+                return cartItem.Quantity;
             }
         }
 
-        internal async Task RemoveCartItem(Guid cartItemID)
+        public async Task<int> RemoveCartItem(Guid cartItemID)
+        {
+            CartItem cartItem = _shoppingCart.CartItems.FirstOrDefault(c => c.CartItemID == cartItemID);
+            if (cartItem.Quantity == 1)
+            {
+                await DeleteCartItem(cartItemID);
+                return 0;
+            }
+            else
+            {
+                cartItem.Quantity--;
+                await _repository.UpdateCartItemAsync(cartItem);
+                return cartItem.Quantity;
+            }
+        }
+
+        internal async Task DeleteCartItem(Guid cartItemID)
         {
             await _repository.RemoveCartItem(cartItemID);
         }

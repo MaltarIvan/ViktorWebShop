@@ -14,11 +14,14 @@
 <body>
     <div style="background-color:azure; margin:5px;">
         <p>@Model.ProductName</p>
-        <p>Količina: @Model.Quantity</p>
+        <p>Količina: </p><p id="@(Model.CartItemID + "quantity")">@Model.Quantity</p>
         <p>Cijena proizvoda: @Model.PricePerItem kn</p>
-        <p>Ukupno: @Model.TotalPrice kn</p>
+        <p>Ukupno: </p><p id="@(Model.CartItemID + "cart-item-price")">@Model.TotalPrice kn</p>
         <img style="height: 100px; width: 100px;" src="~/Content/products/@Model.ImageName" /><br />
-        <a asp-action="RemoveProductFromCart" asp-route-cartItemID="@Model.CartItemID">Makni iz košarice!</a>
+        <a asp-action="DeleteProductFromCart" asp-route-cartItemID="@Model.CartItemID">Ukloni iz košarice!</a>
+        <button id="addButton" onclick="addProduct('@Model.ProductID', '@Model.CartItemID')">Dodaj proizvod u košaricu</button>
+        <button id="addButton" onclick="removeProduct('@Model.CartItemID')">Dodaj proizvod u košaricu</button>
+        <button id="addButton" onclick="deleteProduct('@Model.CartItemID')">Ukloni iz košarice!</button>
     </div>
     <hr />
 </body>
