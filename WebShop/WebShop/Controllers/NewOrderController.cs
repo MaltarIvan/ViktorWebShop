@@ -8,6 +8,8 @@ using WebShop.Utilities;
 using WebShop.Models.NewOrder;
 using MimeKit;
 using System.Net.Mail;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace WebShop.Controllers
 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,11 @@ namespace WebShop.Core
 {
     public class Order
     {
+        public static SelectListItem[] COUNTRIES = new SelectListItem[] {
+            new SelectListItem() { Text = "Hrvatska", Value = "Hrvatska"}
+
+        };
+
         [Key]
         public Guid OrderID { get; set; }
         public DateTime DateCreated { get; set; }

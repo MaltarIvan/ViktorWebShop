@@ -1,0 +1,23 @@
+﻿.product-img {
+    height: 200px; 
+    width: 200px;
+}
+
+.description-par {
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+.product-div {
+    background-color: azure;
+    margin: 5px;
+    box-shadow: 3px 6px 9px;
+    padding: 5px;
+}
+
+.cart-section {
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    width: 100%;
+}

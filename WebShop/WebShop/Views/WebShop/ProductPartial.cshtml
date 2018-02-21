@@ -12,30 +12,36 @@
     <title>ProductPartial</title>
 </head>
 <body>
-    <div style="background-color:azure; margin:5px;">
-        <p>@Model.Name</p>
-        <p>@Model.Description</p>
-        <p><span>Cijena: </span>@Model.Price</p>
-        <img style="height: 100px; width: 100px;" src="~/Content/products/@Model.ImageName" /><br />
+    <div class="product-div">
         <div class="row">
             <div class="col-sm-6">
-                <button id="addButton" onclick="addProduct('@Model.ProductID')">Dodaj proizvod u košaricu</button>
+                <h3>@Model.Name</h3>
+                <p><span><b>Cijena:</b> </span>@Model.Price</p>
+                <img class="product-img" src="~/Content/products/@Model.ImageName" /><br />
+            </div>
+            <div class="col-sm-6">
+                <p class="description-par">@Model.Description</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <button id="addButton" class="btn btn-default" style="margin: 5px;" onclick="addProduct('@Model.ProductID')">Dodaj proizvod u košaricu</button>
             </div>
             <div class="col-sm-6">
                 @if (Model.IsInCart)
                 {
                     <div>
-                        <p class="glyphicon glyphicon-check">Proizvod je u košarici!</p>
+                        <a asp-controller="WebShop" asp-action="ShoppingCart" class="glyphicon glyphicon-check">Proizvod je u košarici!</a>
                     </div>
                 }
                 <div id="@(Model.ProductID + "is-in-cart")" hidden>
-                    <p class="glyphicon glyphicon-check">Proizvod je u košarici!</p>
+                    <a asp-controller="WebShop" asp-action="ShoppingCart" class="glyphicon glyphicon-check">Proizvod je u košarici!</a>
                 </div>
             </div>
         </div>
         @if (User.IsInRole("Admin"))
         {
-            <a asp-controller="ManageWebPage" asp-action="RemoveProduct" asp-route-productID="@Model.ProductID">Makni proizvod iz ponude</a>
+            <a class="btn btn-danger" style="margin-left: 5px;" asp-controller="ManageWebPage" asp-action="RemoveProduct" asp-route-productID="@Model.ProductID">Makni proizvod iz ponude</a>
         }
     </div>
     <hr />
