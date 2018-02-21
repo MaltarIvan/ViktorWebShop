@@ -42,11 +42,6 @@ namespace WebShop.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Products()
-        {
-            return View();
-        }
-
         public async Task<IActionResult> Gallery()
         {
             List<Picture> pictures = await _repository.GetAllPicturesAsync();
@@ -61,6 +56,12 @@ namespace WebShop.Controllers
         public IActionResult Health()
         {
             return View();
+        }
+
+        public IActionResult Products(string name)
+        {
+            ProductVM productVM = new ProductVM { ProductName = name};
+            return View(productVM);
         }
     }
 }

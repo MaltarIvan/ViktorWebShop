@@ -1,8 +1,10 @@
-﻿
+﻿@using WebShop.Models.Home
+@model ProductVM
 @{
     ViewData["Title"] = "Products";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Products</h2>
+
+@Html.Partial("~/wwwroot/Html/Products/" + Model.ProductName + ".html")
 
