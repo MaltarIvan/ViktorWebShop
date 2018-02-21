@@ -18,10 +18,11 @@
     <link rel="stylesheet" href="~/css/layout.css"  asp-append-version="true"/>
 </head>
 <body style="padding-top: 170px; padding-bottom: 100px;">
+    <div id="action-holder" data-request-url="@Url.Action("NumberOfCartItems", "WebShop")"></div>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="row" style="background-color: white;">
             <div class="col-sm-6" style="padding-left: 15px; padding-right: 15px; margin-left: auto; margin-right: auto;">
-                <img src="~/Content/images/logo.jpg"  style="width: 48%; max-height: 100px"/>
+                <img src="~/Content/images/logo.jpg"  style="width: 48%; max-height: 100px; margin-left: 30%;"/>
             </div>
         </div>
         <div class="container">
@@ -79,7 +80,7 @@
                             <li><a href="~/Home/Health#30">Melanom</a></li>
                         </ul>
                     </li>
-                    <li><a asp-area="" asp-controller="WebShop" asp-action="Index"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px;"></span>Trgovina</a></li>
+                    <li><a id="shop-nav-bar-item" asp-area="" asp-controller="WebShop" asp-action="Index"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px;"></span>Trgovina (<span id="number-of-items-nav">0</span>)</a></li>
                     @if (User.IsInRole("Admin"))
                     {
                         <li><a asp-area="" asp-controller="ManageWebPage" asp-action="Index">Uredi Stranicu</a></li>

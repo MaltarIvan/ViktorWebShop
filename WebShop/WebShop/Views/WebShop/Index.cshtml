@@ -10,17 +10,6 @@
     <link rel="stylesheet" href="~/css/WebShop/index.css" asp-append-version="true" />
 </head>
 
-<!--
-<div class="row">
-    <div class="col-sm-2">
-        <h2 style="position: fixed">Proizvodi</h2>
-    </div>
-    <div class="col-sm-2">
-        <a class="btn btn-primary" style="margin-top: 20px; position: fixed" asp-controller="WebShop" asp-action="ShoppingCart"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px;"></span>Shopping Cart (<span>0</span>)</a>
-    </div>
-</div>
--->
-
 <div class="row">
     @foreach (var item in Model.ProductsVM)
     {

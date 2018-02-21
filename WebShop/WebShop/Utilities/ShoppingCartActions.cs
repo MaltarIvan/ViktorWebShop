@@ -48,6 +48,16 @@ namespace WebShop.Utilities
             return _shoppingCart.TotalPrice;
         }
 
+        public int NumberOfCartItems()
+        {
+            int num = 0;
+            foreach (var item in _shoppingCart.CartItems)
+            {
+                num += item.Quantity;
+            }
+            return num;
+        }
+
         public double CartItemPrice(Guid productID)
         {
             CartItem cartItem = _shoppingCart.CartItems.First(c => c.ProductID == productID || c.CartItemID == productID);

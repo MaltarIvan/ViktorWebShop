@@ -43,7 +43,7 @@ namespace WebShop.Controllers
             int productCount = await shoppingCartActions.AddProductAsync(productID);
             double totalPrice = shoppingCartActions.TotalPrice();
             double cartItemPrice = shoppingCartActions.CartItemPrice(productID);
-            return Json(new { TotalPrice =  totalPrice, CartItemPrice = cartItemPrice, ProductCount = productCount});
+            return Json(new { TotalPrice =  totalPrice, CartItemPrice = cartItemPrice, ProductCount = productCount, NumberOfCartItems = shoppingCartActions.NumberOfCartItems() });
         }
 
         public async Task<IActionResult> RemoveProductFromCart(Guid cartItemID)
@@ -56,14 +56,14 @@ namespace WebShop.Controllers
             {
                 cartItemPrice = shoppingCartActions.CartItemPrice(cartItemID);
             }
-            return Json(new { TotalPrice = totalPrice, CartItemPrice = cartItemPrice, ProductCount = productCount });
+            return Json(new { TotalPrice = totalPrice, CartItemPrice = cartItemPrice, ProductCount = productCount, NumberOfCartItems = shoppingCartActions.NumberOfCartItems() });
         }
 
         public async Task<IActionResult> DeleteProductFromCart(Guid cartItemID)
         {
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
             await shoppingCartActions.DeleteCartItem(cartItemID);
-            return Json(shoppingCartActions.TotalPrice());
+            return Json(new { TotalPrice = shoppingCartActions.TotalPrice(), NumberOfCartItems = shoppingCartActions.NumberOfCartItems() });
         }
 
         public IActionResult ShoppingCart()
@@ -71,6 +71,13 @@ namespace WebShop.Controllers
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
             ShoppingCartVM shoppingCartVM = new ShoppingCartVM(shoppingCartActions.GetShoppingCart());
             return View(shoppingCartVM);
+        }
+
+        [HttpGet]
+        public IActionResult NumberOfCartItems()
+        {
+            ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
+            return Json(shoppingCartActions.NumberOfCartItems());
         }
     }
 }
