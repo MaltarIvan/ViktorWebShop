@@ -197,5 +197,22 @@ namespace WebShop.Controllers
             await _repository.DeletePromoCodeAsync(promoCode);
             return Json(promoCodeID);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> SetOrderAsDelivered(Guid orderID)
+        {
+            Order order = await _repository.GetOrderAsync(orderID);
+            order.IsDelivered = true;
+            await _repository.UpdateOrderAsync(order);
+            return Json(orderID);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteOrder(Guid orderID)
+        {
+            Order order = await _repository.GetOrderAsync(orderID);
+            await _repository.DeleteOrderAsync(order);
+            return Json(orderID);
+        }
     }
 }

@@ -51,6 +51,15 @@
             <p>Broj telefona: @Model.PhoneNumber</p>
             <p>Promo Code: @Model.PromoCode</p>
         </div>
+        <div class="col-sm-6">
+            @if (!Model.Delivered)
+            {
+                <button class="btn-success" onclick="setAsDelivered('@Model.OrderID')">Set as delivered</button>
+            }
+            <button class="btn-danger" onclick="deleteOrder('@Model.OrderID')">Delete order</button>
+        </div>
     </div>
 </body>
 </html>
+
+
