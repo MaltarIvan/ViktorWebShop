@@ -36,7 +36,8 @@ namespace WebShop.Controllers
             WebShopVM webShopVM = new WebShopVM(productsVM);
             return View(webShopVM);
         }
-        
+
+        [HttpPost]
         public async Task<IActionResult> AddProductToCart(Guid productID)
         {
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
@@ -46,6 +47,7 @@ namespace WebShop.Controllers
             return Json(new { TotalPrice =  totalPrice, CartItemPrice = cartItemPrice, ProductCount = productCount, NumberOfCartItems = shoppingCartActions.NumberOfCartItems() });
         }
 
+        [HttpPost]
         public async Task<IActionResult> RemoveProductFromCart(Guid cartItemID)
         {
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);

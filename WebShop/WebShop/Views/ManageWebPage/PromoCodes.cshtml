@@ -23,12 +23,18 @@
         <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr id="@(item.PromoCodeID + "table-row")">
                         <td>@item.Code</td>
                         <td>@item.Category</td>
                         <td>@item.DateCreated</td>
                         <td>@item.IsUsed</td>
+                        <td><button onclick="deletePromoCode('@item.PromoCodeID')">Delete</button></td>
+                        <td></td>
                     </tr>
                 }
         </tbody>
     </table>
+
+@section Scripts {
+    <script src="~/js/ManageWebPage/promoCodes.js"></script>
+}

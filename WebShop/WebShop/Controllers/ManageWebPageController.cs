@@ -189,5 +189,13 @@ namespace WebShop.Controllers
             int count = await _repository.DeleteUnusedShoppingCartsAndOrdersAsync();
             return Json(count);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePromoCode(Guid promoCodeID)
+        {
+            PromoCode promoCode = await _repository.GetPromoCodeAsync(promoCodeID);
+            await _repository.DeletePromoCodeAsync(promoCode);
+            return Json(promoCodeID);
+        }
     }
 }
