@@ -2,22 +2,31 @@
     ViewData["Title"] = "Uredi Trgovinu";
 }
 
+<head>
+    <link rel="stylesheet" href="~/css/ManageWebPage/index.css" asp-append-version="true" />
+</head>
+
 <h2>Uredi Trgovinu</h2>
 <hr />
 <div class="row">
     <div class="col-sm-3">
-        <a class="btn btn-primary" style="width: 100%;" asp-action="AddNewProduct">Dodaj Novi Proizvod</a><br />
+        <a class="btn btn-primary manage-button" asp-action="AddNewProduct">Dodaj Novi Proizvod</a><br />
     </div>
     <div class="col-sm-3">
-        <a class="btn btn-primary" style="width: 100%;" asp-action="PromoCodes">Promo Kodovi</a><br />
+        <a class="btn btn-primary manage-button" asp-action="PromoCodes">Promo Kodovi</a><br />
     </div>
     <div class="col-sm-3">
-        <a class="btn btn-primary" style="width: 100%;" asp-action="AllOrders">Narudžbe</a><br />
+        <a class="btn btn-primary manage-button" asp-action="AllOrders">Narudžbe</a><br />
     </div>
     <div class="col-sm-3">
-        <a class="btn btn-primary" style="width: 100%;" asp-action="AddPictureToGallery">Dodaj Sliku U Galeriju</a><br />
+        <a class="btn btn-primary manage-button" asp-action="AddPictureToGallery">Dodaj Sliku U Galeriju</a><br />
+    </div>
+    <div class="col-sm-3">
+        <button class="btn btn-primary manage-button" onclick="deleteCartsAndOrders()">Obriši Nedovršene Narudžbe</button><br />
     </div>
 </div>
 
-
+@section Scripts {
+    <script src="~/js/ManageWebPage/index.js"></script>
+}
 

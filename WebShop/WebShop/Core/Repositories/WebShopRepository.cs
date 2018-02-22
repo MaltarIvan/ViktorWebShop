@@ -222,5 +222,16 @@ namespace WebShop.Core.Repositories
             await _context.SaveChangesAsync();
             return picture;
         }
+
+        public async Task<int> DeleteUnusedShoppingCartsAndOrdersAsync()
+        {
+            List<ShoppingCart> unusedShoppingCarts = await _context.ShoppingCarts.Where(s => ((int)DbFunctions.DiffDays(s.DateCreated, DateTime.Now)) > 1).ToListAsync();
+            foreach (var item in unusedShoppingCarts)
+            {
+                _context.ShoppingCarts.Remove(item);
+            }
+            await _context.SaveChangesAsync();
+            return unusedShoppingCarts.Count();
+        }
     }
 }

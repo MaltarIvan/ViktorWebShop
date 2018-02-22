@@ -182,5 +182,12 @@ namespace WebShop.Controllers
             await _repository.DeletePictureAsync(pictureID);
             return RedirectToAction("Gallery", "Home");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteUnusedShoppingCartsAndOrders()
+        {
+            int count = await _repository.DeleteUnusedShoppingCartsAndOrdersAsync();
+            return Json(count);
+        }
     }
 }
