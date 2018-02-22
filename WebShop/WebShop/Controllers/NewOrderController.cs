@@ -171,6 +171,8 @@ namespace WebShop.Controllers
                 order.PromoCode.IsUsed = true;
                 await _repository.UpdatePromoCodeAsync(order.PromoCode);
             }
+            ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
+            await shoppingCartActions.EmptyTheCartAsync();
             return RedirectToAction("Index", "WebShop");
         }
 

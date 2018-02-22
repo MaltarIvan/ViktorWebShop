@@ -96,7 +96,7 @@ namespace WebShop.Core.Repositories
             return cartItem;
         }
 
-        public async Task<CartItem> RemoveCartItem(Guid cartItemID)
+        public async Task<CartItem> RemoveCartItemAsync(Guid cartItemID)
         {
             CartItem cartItem = await GetCartItemAsync(cartItemID);
             _context.CartItems.Remove(cartItem);

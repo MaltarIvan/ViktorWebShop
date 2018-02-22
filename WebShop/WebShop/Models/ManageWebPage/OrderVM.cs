@@ -47,13 +47,20 @@ namespace WebShop.Models.ManageWebPage
             Email = order.Email;
             MobilePhoneNumber = order.MobilePhoneNumber;
             PhoneNumber = order.PhoneNumber;
-            if (!order.PromoCode.IsUsed)
+            if (order.PromoCode != null)
             {
-                PromoCode = order.PromoCode.Code;
+                if (!order.PromoCode.IsUsed)
+                {
+                    PromoCode = order.PromoCode.Code;
+                }
+                else
+                {
+                    PromoCode = "Nevažeći Promo Kod";
+                }
             }
             else
             {
-                PromoCode = "Nevažeći Promo Kod";
+                PromoCode = "";
             }
             Completed = order.IsCompleted;
             Delivered = order.IsDelivered;

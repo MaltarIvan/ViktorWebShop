@@ -100,7 +100,7 @@ namespace WebShop.Utilities
 
         internal async Task DeleteCartItem(Guid cartItemID)
         {
-            await _repository.RemoveCartItem(cartItemID);
+            await _repository.RemoveCartItemAsync(cartItemID);
         }
 
         internal ShoppingCart GetShoppingCart()
@@ -111,6 +111,15 @@ namespace WebShop.Utilities
         internal List<CartItem> GetCartItems()
         {
             return _shoppingCart.CartItems;
+        }
+
+        internal async Task EmptyTheCartAsync()
+        {
+            List<CartItem> cartItems = new List<CartItem>(_shoppingCart.CartItems);
+            foreach (var item in cartItems)
+            {
+                await _repository.RemoveCartItemAsync(item.CartItemID);
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ namespace WebShop.Controllers
             _repository = repository;
             _hostingEnvironment = hostingEnvironment;
         }
-
+        
         public async Task<IActionResult> Index()
         {
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
