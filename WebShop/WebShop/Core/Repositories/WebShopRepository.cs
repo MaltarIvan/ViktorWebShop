@@ -225,13 +225,31 @@ namespace WebShop.Core.Repositories
 
         public async Task<int> DeleteUnusedShoppingCartsAndOrdersAsync()
         {
+            int count = 0;
             List<ShoppingCart> unusedShoppingCarts = await _context.ShoppingCarts.Where(s => ((int)DbFunctions.DiffDays(s.DateCreated, DateTime.Now)) > 1).ToListAsync();
             foreach (var item in unusedShoppingCarts)
             {
-                _context.ShoppingCarts.Remove(item);
+                if (_context.Orders.All(o => o.ShoppingCartID != item.ShoppingCartID))
+                {
+                    _context.ShoppingCarts.Remove(item);
+                    count++;
+                }
+            }
+            List<Order> unfinishedOrders = await _context.Orders.Include(o => o.ShoppingCart).Where(o => ((int)DbFunctions.DiffDays(o.DateCreated, DateTime.Now)) > 1).ToListAsync();
+            foreach (var item in unfinishedOrders)
+            {
+                if (item.IsCompleted || item.IsDelivered)
+                {
+                    continue;
+                }
+                else
+                {
+                    _context.ShoppingCarts.Remove(item.ShoppingCart);
+                    count++;
+                }
             }
             await _context.SaveChangesAsync();
-            return unusedShoppingCarts.Count();
+            return count;
         }
     }
 }

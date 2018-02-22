@@ -15,11 +15,11 @@
         <a class="btn btn-primary" style="width: 100%;" asp-action="DeliveredOrders">Poslane Naruđbe</a><br />
     </div>
 </div>
-<div id="order-div">
-    @foreach (var item in Model)
-    {
+@foreach (var item in Model)
+{
+    <div id="@(item.OrderID + "order")">
         <hr />
         @Html.Partial("~/Views/ManageWebPage/OrderPartial.cshtml", item)
-    }
-</div>
+    </div>
+}
 

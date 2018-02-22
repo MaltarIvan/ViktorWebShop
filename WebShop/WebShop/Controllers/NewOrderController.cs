@@ -156,7 +156,6 @@ namespace WebShop.Controllers
         {
             Order order = await _repository.GetOrderAsync(orderID);
             order.IsCompleted = true;
-            await _repository.UpdateOrderAsync(order);
             if (order.PromoCode != null)
             {
                 if (order.PromoCode.IsUsed)
@@ -172,6 +171,11 @@ namespace WebShop.Controllers
                 await _repository.UpdatePromoCodeAsync(order.PromoCode);
             }
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
+            ShoppingCart shoppingCart = new ShoppingCart(Guid.NewGuid());
+            shoppingCart.CartItems = new List<CartItem>(shoppingCartActions.GetShoppingCart().CartItems);
+            order.ShoppingCart = shoppingCart;
+            order.ShoppingCartID = shoppingCart.ShoppingCartID;
+            await _repository.UpdateOrderAsync(order);
             await shoppingCartActions.EmptyTheCartAsync();
             return RedirectToAction("Index", "WebShop");
         }
