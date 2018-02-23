@@ -41,8 +41,6 @@ namespace WebShop.Models.NewOrder
         // [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         public string PhoneNumber { get; set; }
 
-        public string Details { get; set; }
-
         public string PromoCode { get; set; }
     }
 }

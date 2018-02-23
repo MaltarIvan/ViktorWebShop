@@ -22,7 +22,8 @@ namespace WebShop.Models.WebShop
             ProductID = product.ProductID;
             Name = product.Name;
             DateAdded = product.DateAdded;
-            Description = product.Description;
+            string description = product.Description.Replace(Environment.NewLine, "<br/>");
+            Description = description;
             Price = product.Price;
             ImageName = product.ImageName;
             IsInCart = isInCart;

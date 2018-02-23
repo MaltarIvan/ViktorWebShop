@@ -20,7 +20,7 @@
                 <img class="product-img" src="~/Content/products/@Model.ImageName" /><br />
             </div>
             <div class="col-sm-6">
-                <p class="description-par">@Model.Description</p>
+                <p class="description-par">@Html.Raw(Model.Description)</p>
             </div>
         </div>
         <div class="row">

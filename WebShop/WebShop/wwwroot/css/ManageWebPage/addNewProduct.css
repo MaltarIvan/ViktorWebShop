@@ -8,15 +8,6 @@
     background-color: azure;
 }
 
-.input-col {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-}
-
 .info-label {
     width: 100%;
     text-align: left;
@@ -28,8 +19,21 @@
     border-radius: 5px;
 }
 
-.countries-drop-down {
+.info-textarea {
     width: 90%;
-    height: 35px;
     border-radius: 5px;
+    height: 300px;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.submit-btn {
+    width: 100%;
 }

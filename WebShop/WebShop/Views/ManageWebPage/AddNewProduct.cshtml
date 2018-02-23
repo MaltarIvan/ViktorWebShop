@@ -5,27 +5,54 @@
     ViewData["Title"] = "AddNewProduct";
 }
 
+<head>
+    <link rel="stylesheet" href="~/css/ManageWebPage/addNewProduct.css" />
+</head>
+
 <h2>Dodaj Novi Proizvod</h2>
-<form asp-action="AddNewProduct" method="post" enctype="multipart/form-data">
-    @if (ViewContext.ViewData.ModelState.IsValid == false)
+
+<div class="row">
+        <form asp-action="AddNewProduct" method="post" enctype="multipart/form-data">
+            @if (ViewContext.ViewData.ModelState.IsValid == false)
             {
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                There were some input errors.
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        There were some input errors.
+                    </div>
+                    <div class="panel-body">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                </div>
+            }
+            <div class="col-sm-6">
+                <div class="row input-section">
+                    <label class="info-label">Naziv proizvoda: </label><input class="info-input" asp-for="Name" /><span asp-validation-for="Name" style="color:red"></span><br />
+                </div>
+                <div class="row input-section">
+                    <label class="info-label">Opis proizvoda: </label><textarea class="info-textarea" asp-for="Description"></textarea><span asp-validation-for="Description" style="color:red"></span><br />
+                </div>
+                <div class="row input-section">
+                    <label class="info-label">Cijena: </label><input class="info-input" asp-for="Price" type="number" step="0.01" /> kn<span asp-validation-for="Price" style="color:red"></span><br />
+                </div>
+                <div class="row input-section">
+                    <label class="info-label">Slika proizvoda: </label><br />
+                    <label for="file-upload" class="custom-file-upload">
+                        <i class="btn btn-default"><span class="glyphicon glyphicon-upload"></span> Učitaj sliku</i>
+                        <input asp-for="Image" id="file-upload" type="file" onchange="ShowPreview(this)" /><span asp-validation-for="Image" style="color:red"></span> <br />
+                    </label>
+                </div>
+                <div class="row">
+                    <img id="imgPrev" src="~/Content/default-picture.svg" class="Img-prev" style="width: 100px;" /><br />
+                    <label id="file-name" class="File-label">No file chosen.</label><br />
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <input class="btn btn-primary submit-btn" type="submit" />
+                    </div>
+                </div>
             </div>
-            <div class="panel-body">
-                <div asp-validation-summary="All" class="text-danger"></div>
-            </div>
-        </div>
-    }
-    <label>Naziv proizvoda: </label><input asp-for="Name" /><span asp-validation-for="Name" style="color:red"></span><br />
-    <label>Opis proizvoda: </label><input asp-for="Description" /><span asp-validation-for="Description" style="color:red"></span><br />
-    <label>Cijena: </label><input asp-for="Price" type="number" step="0.01" />kn<span asp-validation-for="Price" style="color:red"></span><br />
-    <label>Slika proizvoda: </label><input asp-for="Image" id="file-upload" type="file" onchange="ShowPreview(this)" /><span asp-validation-for="Image" style="color:red"></span> <br />
-    <img id="imgPrev" src="~/Content/default-picture.svg" class="Img-prev" style="width: 100px;" />
-    <label id="file-name" class="File-label">No file chosen.</label>
-    <input type="submit" />
-</form>
+        </form>
+</div>
 
 @section Scripts {
     <script src="~/js/ManageWebPage/AddNewProduct.js"></script>
