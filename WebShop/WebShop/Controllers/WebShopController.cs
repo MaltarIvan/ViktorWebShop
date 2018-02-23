@@ -85,5 +85,12 @@ namespace WebShop.Controllers
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
             return Json(shoppingCartActions.NumberOfCartItems());
         }
+
+        public async Task<IActionResult> EmptyTheShoppingCart()
+        {
+            ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
+            await shoppingCartActions.EmptyTheCartAsync();
+            return RedirectToAction("Index");
+        }
     }
 }
