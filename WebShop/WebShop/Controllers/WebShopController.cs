@@ -51,7 +51,11 @@ namespace WebShop.Controllers
         public async Task<IActionResult> RemoveProductFromCart(Guid cartItemID)
         {
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
-            int productCount = await shoppingCartActions.RemoveCartItem(cartItemID);
+            int productCount = shoppingCartActions.GetShoppingCart().CartItems.First(c => c.CartItemID == cartItemID).Quantity;
+            if (productCount > 1)
+            {
+                productCount = await shoppingCartActions.RemoveCartItem(cartItemID);
+            }
             double totalPrice = shoppingCartActions.TotalPrice();
             double cartItemPrice = 0;
             if (productCount != 0)

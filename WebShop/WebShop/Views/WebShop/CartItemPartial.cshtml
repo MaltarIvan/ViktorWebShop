@@ -12,15 +12,30 @@
     <title>CartItemPartial</title>
 </head>
 <body>
-    <div style="background-color:azure; margin:5px;">
-        <p>@Model.ProductName</p>
-        <p>Količina: </p><p id="@(Model.CartItemID + "quantity")">@Model.Quantity</p>
-        <p>Cijena proizvoda: @Model.PricePerItem kn</p>
-        <p>Ukupno: </p><p id="@(Model.CartItemID + "cart-item-price")">@Model.TotalPrice kn</p>
-        <img style="height: 100px; width: 100px;" src="~/Content/products/@Model.ImageName" /><br />
-        <button id="addButton" onclick="addProduct('@Model.ProductID', '@Model.CartItemID')">Dodaj proizvod u košaricu</button><br />
-        <button id="addButton" onclick="removeProduct('@Model.CartItemID')">Makni proizvod iz košarice</button><br />
-        <button id="addButton" onclick="deleteProduct('@Model.CartItemID')">Ukloni iz košarice!</button>
+    <div class="product-div">
+        <p class="name-par"><b>@Model.ProductName</b></p>
+        <div class="row quantity-div">
+            <div class="col-sm-3">
+                <p class="quantity-par">Količina: </p>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-default quantity-button" id="addButton" onclick="removeProduct('@Model.CartItemID')">-</button><br />
+            </div>
+            <div class="col-sm-2">
+                <p class="quantity-par" id="@(Model.CartItemID + "quantity")">@Model.Quantity</p>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-default quantity-button" id="addButton" onclick="addProduct('@Model.ProductID', '@Model.CartItemID')">+</button><br />
+            </div>
+        </div>
+        <p>Cijena proizvoda:  @Model.PricePerItem kn</p>
+        <p id="@(Model.CartItemID + "cart-item-price")">Ukupno: @Model.TotalPrice kn</p>
+        <img class="product-img" src="~/Content/products/@Model.ImageName" /><br />
+        <div class="row">
+            <div class="col-sm-6">
+                <button class="btn btn-danger button" id="addButton" onclick="deleteProduct('@Model.CartItemID')">Ukloni iz košarice!</button>
+            </div>
+        </div>
     </div>
     <hr />
 </body>

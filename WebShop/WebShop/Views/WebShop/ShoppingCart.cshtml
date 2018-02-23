@@ -6,19 +6,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ShoppingCart</h2>
+<head>
+    <link rel="stylesheet" href="~/css/WebShop/shoppingCart.css"/>
+</head>
+
+<h2>Vaša košarica</h2>
 @if (Model.CartItemsVM.Count > 0)
 {
     <div id="cart-details">
-        <label>Ukupno: </label><p id="total-price">@Model.TotalPrice kn</p>
-
-        <div>
-            <a asp-controller="NewOrder" asp-action="AddNewOrder">Naruči</a><br />
-            <a asp-action="Index">Dodaj još proizvoda u košaricu</a>
+        <div class="row">
+            <div class="col-sm-3 total-div">
+                <label class="total-label">Ukupno: </label>
+                <p class="total-par" id="total-price">@Model.TotalPrice kn</p>
+            </div>
+            <div class="col-sm-3">
+                <a class="btn btn-success button" asp-controller="NewOrder" asp-action="AddNewOrder">Naruči</a><br />
+                <a class="btn btn-primary button" asp-action="Index">Dodaj još proizvoda u košaricu</a><br />
+            </div>
         </div>
+        <hr />
     </div>
 
-    <div id="cart-items-container">
+    <div class="row" id="cart-items-container">
         @foreach (var item in Model.CartItemsVM)
         {
             <div id="@item.CartItemID" class="col-sm-6 cart-item">
