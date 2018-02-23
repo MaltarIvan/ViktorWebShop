@@ -19,22 +19,13 @@
     border-radius: 5px;
 }
 
-.info-textarea {
-    width: 90%;
-    border-radius: 5px;
-    height: 300px;
-}
-
-.custom-file-upload {
-    display: inline-block;
-    cursor: pointer;
-}
-
-input[type="file"] {
-    display: none;
-}
-
 .button {
     margin: 5px;
     width: 100%;
+}
+
+.categories-drop-down {
+    width: 90%;
+    height: 35px;
+    border-radius: 5px;
 }

@@ -6,26 +6,50 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<head>
+    <link rel="stylesheet" href="~/css/ManageWebPage/addNewPicture.css" />
+</head>
+
 <h2>Add Picture To Gallery</h2>
 
-<form asp-action="AddPictureToGallery" method="post" enctype="multipart/form-data">
-    @if (ViewContext.ViewData.ModelState.IsValid == false)
+<div class="row">
+    <form asp-action="AddPictureToGallery" method="post" enctype="multipart/form-data">
+        @if (ViewContext.ViewData.ModelState.IsValid == false)
             {
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                There were some input errors.
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    There were some input errors.
+                </div>
+                <div class="panel-body">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
             </div>
-            <div class="panel-body">
-                <div asp-validation-summary="All" class="text-danger"></div>
+        }
+        <div class="col-sm-6">
+            <div class="row input-section">
+                <label class="info-label">Opis slike: </label><input class="info-input" asp-for="Description" /><span asp-validation-for="Description" style="color: red;"></span><br />
+            </div>
+            <div class="row input-section">
+                <label>Slika proizvoda: </label><br />
+                <label>
+                    <i class="btn btn-default"><span class="glyphicon glyphicon-upload"></span> Učitaj sliku</i>
+                    <input asp-for="Image" id="file-upload" type="file" onchange="ShowPreview(this)" /><span asp-validation-for="Image" style="color:red"></span> <br />
+                </label>
+            </div>
+            <div class="row">
+                <img id="imgPrev" src="~/Content/default-picture.svg" class="Img-prev" style="width: 100px;" /><br />
+                <label id="file-name" class="File-label">No file chosen.</label><br />
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input class="btn btn-primary button" type="submit" />
+                    <a class="btn btn-danger button" asp-action="Index">Cancel</a>
+                </div>
             </div>
         </div>
-    }
-    <label>Opis slike: </label><input asp-for="Description"/><span asp-validation-for="Description" style="color: red;"></span><br />
-    <label>Slika proizvoda: </label><input asp-for="Image" id="file-upload" type="file" onchange="ShowPreview(this)" /><span asp-validation-for="Image" style="color:red"></span> <br />
-    <img id="imgPrev" src="~/Content/default-picture.svg" class="Img-prev" style="width: 100px;" />
-    <label id="file-name" class="File-label">No file chosen.</label>
-    <input type="submit" />
-</form>
-    @section Scripts {
-        <script src="~/js/ManageWebPage/AddPicture.js"></script>
-    }
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/js/ManageWebPage/AddPicture.js"></script>
+}

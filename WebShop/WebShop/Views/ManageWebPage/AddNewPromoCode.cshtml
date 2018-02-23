@@ -7,22 +7,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>AddNewPromoCode</h2>
+<head>
+    <link rel="stylesheet" href="~/css/ManageWebPage/addNewPromoCode.css" />
+</head>
 
-<form asp-action="AddNewPromoCode" method="post">
-    @if (ViewContext.ViewData.ModelState.IsValid == false)
+<h2>Add New Promo Code</h2>
+
+<div class="row">
+    <form asp-action="AddNewPromoCode" method="post">
+        @if (ViewContext.ViewData.ModelState.IsValid == false)
             {
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                There were some input errors.
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    There were some input errors.
+                </div>
+                <div class="panel-body">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
             </div>
-            <div class="panel-body">
-                <div asp-validation-summary="All" class="text-danger"></div>
+        }
+        <div class="col-sm-6">
+            <div class="row input-section">
+                <label class="info-label">Kod: </label><input class="info-input" asp-for="Code" /><span asp-validation-for="Code" style="color: red"></span><br />
+            </div>
+            <div class="row input-section">
+                <label class="info-label">Kategorija: </label>@Html.DropDownListFor(Model => Model.Category, PromoCode.DISCOUNT_TYPE, new { @class = "categories-drop-down" })<br />
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input class="btn btn-primary button" type="submit" />
+                    <a class="btn btn-danger button" asp-action="PromoCodes">Cancel</a>
+                </div>
             </div>
         </div>
-    }
-    <label>Kod: </label><input asp-for="Code"/><span asp-validation-for="Code" style="color: red"></span><br />
-    @Html.DropDownListFor(Model => Model.Category, PromoCode.DISCOUNT_TYPE)
-    <input type="submit"/>
-</form>
-
+    </form>
+</div>

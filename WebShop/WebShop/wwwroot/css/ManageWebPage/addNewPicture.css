@@ -19,12 +19,6 @@
     border-radius: 5px;
 }
 
-.info-textarea {
-    width: 90%;
-    border-radius: 5px;
-    height: 300px;
-}
-
 .custom-file-upload {
     display: inline-block;
     cursor: pointer;
