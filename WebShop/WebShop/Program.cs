@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace WebShop
 {
@@ -20,6 +21,21 @@ namespace WebShop
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseSerilog((context, logger) =>
+                {
+                    var cnnstr = context.Configuration["ConnectionStrings:DefaultConnection"];
+                    logger.MinimumLevel.Error()
+                    .Enrich.FromLogContext()
+                    .WriteTo.MSSqlServer(
+                         connectionString: cnnstr,
+                        tableName: "ErrorLogs",
+                        autoCreateSqlTable: true);
+
+                    if (context.HostingEnvironment.IsDevelopment())
+                    {
+                        logger.WriteTo.RollingFile("error-log.txt");
+                    }
+                })
                 .Build();
     }
 }
