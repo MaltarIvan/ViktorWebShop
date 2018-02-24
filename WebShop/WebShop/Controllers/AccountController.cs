@@ -331,6 +331,7 @@ namespace WebShop.Controllers
             return View(nameof(ExternalLogin), model);
         }
 
+        /*
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
@@ -439,6 +440,7 @@ namespace WebShop.Controllers
             return View();
         }
 
+    */
         #region Helpers
 
         private void AddErrors(IdentityResult result)
@@ -448,7 +450,6 @@ namespace WebShop.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
-
         private IActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))

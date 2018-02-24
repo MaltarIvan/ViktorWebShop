@@ -105,6 +105,7 @@ namespace WebShop.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendVerificationEmail(IndexViewModel model)
@@ -128,6 +129,7 @@ namespace WebShop.Controllers
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToAction(nameof(Index));
         }
+        */
 
         [HttpGet]
         public async Task<IActionResult> ChangePassword()
