@@ -18,6 +18,7 @@
                 <th>Kategorija</th>
                 <th>Datum Objave</th>
                 <th>Iskorišten ?</th>
+                <th>Izbriši</th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +30,6 @@
                         <td>@item.DateCreated</td>
                         <td>@item.IsUsed</td>
                         <td><button onclick="deletePromoCode('@item.PromoCodeID')">Delete</button></td>
-                        <td></td>
                     </tr>
                 }
         </tbody>

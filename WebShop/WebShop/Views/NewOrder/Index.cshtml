@@ -12,49 +12,56 @@
 
 <h2>Narudžba</h2>
 
-<table class="check-out-items-table">
-    <thead>
-        <tr>
-            <th>Proizvod</th>
-            <th>Količina</th>
-            <th>Cijena po komadu</th>
-            <th>Ukupna cijena</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.ShoppingCartVM.CartItemsVM)
-    {
-            <tr>
-                <td>@item.ProductName</td>
-                <td>@item.Quantity</td>
-                <td>@item.PricePerItem</td>
-                <td>@item.TotalPrice</td>
-            </tr>
-    }
-    </tbody>
-</table>
-<p>Ukupno: @Model.TotalPrice</p>
-<p>Popust: @Model.Discount</p>
-<p>Za platiti: @(Model.TotalPrice - Model.Discount)</p>
-<p>Ime: @Model.Name</p>
-<p>Prezime: @Model.Surname</p>
-<p>Adresa 1: @Model.StreetAdress1</p>
-<p>Adresa 2: @Model.StreetAdress2</p>
-<p>Grad: @Model.City</p>
-<p>Poštanski broj: @Model.PostalCode</p>
-<p>Država: @Model.Country</p>
-<p>Email: @Model.Email</p>
-<p>Broj mobitela: @Model.MobilePhoneNumber</p>
-<p>Broj telefona: @Model.PhoneNumber</p>
-<p>Promo Code: @Model.PromoCode</p>
 <div class="row">
-    <div class="col-sm-2">
-        <a class="btn btn-primary" asp-action="CompleteOrder" asp-route-orderID="@Model.OrderID">Dovrši Narudžbu</a>
+    <table class="check-out-items-table">
+        <thead>
+            <tr>
+                <th>Proizvod</th>
+                <th>Količina</th>
+                <th>Cijena po komadu</th>
+                <th>Ukupna cijena</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ShoppingCartVM.CartItemsVM)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.PricePerItem</td>
+                    <td>@item.TotalPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<hr />
+<div class="row">
+    <div class="col-sm-5">
+        <div class="row total-div">
+            <label class="total-label">Ukupno: </label><p class="total-par">@Model.TotalPrice kn</p>
+            <label class="total-label">Popust: </label><p class="total-par">@Model.Discount kn</p>
+            <label class="total-label">Za platiti: </label><p class="total-par">@(Model.TotalPrice - Model.Discount) kn</p>
+        </div>
+        <p><b>Ime:</b> @Model.Name</p>
+        <p><b>Prezime:</b> @Model.Surname</p>
+        <p><b>Adresa 1:</b> @Model.StreetAdress1</p>
+        <p><b>Adresa 2:</b> @Model.StreetAdress2</p>
+        <p><b>Grad:</b> @Model.City</p>
+        <p><b>Poštanski broj:</b> @Model.PostalCode</p>
+        <p><b>Država:</b> @Model.Country</p>
+        <p><b>Email:</b> @Model.Email</p>
+        <p><b>Broj mobitela:</b> @Model.MobilePhoneNumber</p>
+        <p><b>Broj telefona:</b> @Model.PhoneNumber</p>
+        <p><b>Promo Code:</b> @Model.PromoCode</p>
     </div>
-    <div class="col-sm-2">
-        <a class="btn btn-primary" asp-action="ChangeOrderDetails" asp-route-orderID="@Model.OrderID">Promjeni Podatke</a>
-    </div>
-    <div class="col-sm-2">
-        <a class="btn btn-danger" asp-action="CancleOrder" asp-route-orderID="@Model.OrderID">Otkaži Narudžbu</a>
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-6">
+                <a class="btn btn-success button" asp-action="CompleteOrder" asp-route-orderID="@Model.OrderID">Dovrši Narudžbu</a><br />
+                <a class="btn btn-primary button" asp-action="ChangeOrderDetails" asp-route-orderID="@Model.OrderID">Promjeni Podatke</a><br />
+                <a class="btn btn-danger button" asp-action="CancleOrder" asp-route-orderID="@Model.OrderID">Otkaži Narudžbu</a><br />
+            </div>
+        </div>
     </div>
 </div>
