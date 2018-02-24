@@ -214,5 +214,41 @@ namespace WebShop.Controllers
             await _repository.DeleteOrderAsync(order);
             return Json(orderID);
         }
+
+        public async Task<IActionResult> ChangeProductDetails(Guid productID)
+        {
+            Product product = await _repository.GetProductAsync(productID);
+            ChangeProductDetailsVM changeProductDetailsVM = new ChangeProductDetailsVM
+            {
+                Price = product.Price.ToString().Replace(",", "."),
+                Description = product.Description,
+                ProductID = product.ProductID
+            };
+            return View(changeProductDetailsVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeProductDetails(ChangeProductDetailsVM changeProductDetailsVM)
+        {
+            string priceStr = changeProductDetailsVM.Price;
+            priceStr = priceStr.Replace(".", ",");
+            Decimal priceDec = Convert.ToDecimal(priceStr);
+            bool isPriceFormat = Decimal.Round(priceDec, 2) == priceDec;
+            if (ModelState.IsValid)
+            {
+                if (!isPriceFormat)
+                {
+                    ModelState.AddModelError("CustomError", "The price format is incorrect.");
+                    changeProductDetailsVM.Price = null;
+                    return View(changeProductDetailsVM);
+                }
+                Product product = await _repository.GetProductAsync(changeProductDetailsVM.ProductID);
+                product.Price = Convert.ToDouble(priceDec);
+                product.Description = changeProductDetailsVM.Description;
+                await _repository.UpdateProductAsync(product);
+                return RedirectToAction("Index", "WebShop");
+            }
+            return View(changeProductDetailsVM);
+        }
     }
 }

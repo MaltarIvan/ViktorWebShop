@@ -25,7 +25,12 @@
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <button id="addButton" class="btn btn-primary" style="margin: 5px;" onclick="addProduct('@Model.ProductID')">Dodaj proizvod u košaricu</button>
+                <button id="addButton" class="btn btn-primary button" onclick="addProduct('@Model.ProductID')">Dodaj proizvod u košaricu</button><br />
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="btn btn-default button" asp-controller="ManageWebPage" asp-action="ChangeProductDetails" asp-route-productID="@Model.ProductID">Ažuriraj proizvod</a><br />
+                    <a class="btn btn-danger button" asp-controller="ManageWebPage" asp-action="RemoveProduct" asp-route-productID="@Model.ProductID">Makni proizvod iz ponude</a>
+                }
             </div>
             <div class="col-sm-6">
                 @if (Model.IsInCart)
@@ -39,10 +44,6 @@
                 </div>
             </div>
         </div>
-        @if (User.IsInRole("Admin"))
-        {
-            <a class="btn btn-danger" style="margin-left: 5px;" asp-controller="ManageWebPage" asp-action="RemoveProduct" asp-route-productID="@Model.ProductID">Makni proizvod iz ponude</a>
-        }
     </div>
     <hr />
 </body>
