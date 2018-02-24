@@ -32,6 +32,8 @@ namespace WebShop.Core
         public PromoCode PromoCode { get; set; }
         public bool IsCompleted { get; set; }
         public bool IsDelivered { get; set; }
+        public double TotalPrice { get; set; }
+        public double Discount { get; set; }
 
         public Order(ShoppingCart shoppingCart, string name, string surname, string streetAdress1, string streetAdress2, string city, int postalCode, string country, string email, string mobilePhoneNumber, string phoneNumber, PromoCode promoCode)
         {
@@ -58,8 +60,6 @@ namespace WebShop.Core
 
         public string ToEmailString()
         {
-            double totalPrice = GetTotalPrice();
-            double discount = GetDiscount();
             string tableStyle = "border: 1px solid black;border-collapse: collapse;margin-bottom: 25px;width:100%;";
             string tableCellStyle = "border: 1px solid black;border-collapse: collapse;padding:5px;text-align:left;";
 
@@ -75,10 +75,10 @@ namespace WebShop.Core
                     "</td></tr>";
             }
             str += "</tbody></table><hr/><br/>" +
-                "<br/><b>Ukupna cijena:</b> " + totalPrice + " kn" +
-                "<br/><b>Popust:</b> " + discount + " kn" +
-                "<br/><b>Za platiti:</b> " + (totalPrice - discount) + " kn<hr/>" +
-                "<b>Broj naruđbe:</b> " + this.OrderID +
+                "<br/><b>Ukupna cijena:</b> " + TotalPrice + " kn" +
+                "<br/><b>Popust:</b> " + Discount + " kn" +
+                "<br/><b>Za platiti:</b> " + (TotalPrice - Discount) + " kn<hr/>" +
+                "<b>Broj narudžbe:</b> " + this.OrderID +
                 "<br/><b>Datum:</b> " + this.DateCreated +
                 "<br/><b>Ime:</b> " + Name +
                 "<br/><b>Prezime:</b> " + Surname +
@@ -106,7 +106,7 @@ namespace WebShop.Core
             {
                 totalPrice += item.PricePerItem * item.Quantity;
             }
-            return totalPrice;
+            return Math.Round(totalPrice, 2);
         }
 
         public double GetDiscount()
@@ -171,7 +171,7 @@ namespace WebShop.Core
                 }
             }
 
-            return discount;
+            return Math.Round(discount, 2);
         }
     }
 }

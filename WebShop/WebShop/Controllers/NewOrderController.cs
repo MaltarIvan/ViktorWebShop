@@ -52,7 +52,7 @@ namespace WebShop.Controllers
 
                 PromoCode promoCode = await _repository.GetPromoCodeAsync(addNewOrderVM.PromoCode);
 
-                Core.Order order = new Core.Order
+                Order order = new Order
                 {
                     ShoppingCart = shoppingCart,
                     ShoppingCartID = shoppingCart.ShoppingCartID,
@@ -72,6 +72,8 @@ namespace WebShop.Controllers
                     IsCompleted = false,
                     IsDelivered = false
                 };
+                order.TotalPrice = order.GetTotalPrice();
+                order.Discount = order.GetDiscount();
                 await _repository.AddOrderAsync(order);
                 return RedirectToAction("Index", new { orderID = order.OrderID});
             }
@@ -139,6 +141,8 @@ namespace WebShop.Controllers
                     IsCompleted = false,
                     IsDelivered = false
                 };
+                order.TotalPrice = order.GetTotalPrice();
+                order.Discount = order.GetDiscount();
                 await _repository.UpdateOrderAsync(order);
                 return RedirectToAction("Index", new { orderID = order.OrderID });
             }
@@ -185,8 +189,8 @@ namespace WebShop.Controllers
             MailMessage message = new MailMessage();
             message.To.Add(new MailAddress("maltar.ivan@gmail.com"));
             message.From = new MailAddress("maltar.ivan@gmail.com");
-            message.Subject = "[Nova naruđba]";
-            message.Body = "<h3>Napravljena je nova naruđba:</h3><br/><hr/> " + order.ToEmailString();
+            message.Subject = "[Nova narudžba]";
+            message.Body = "<h3>Napravljena je nova narudžba:</h3><br/><hr/> " + order.ToEmailString();
 
             message.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
@@ -201,8 +205,8 @@ namespace WebShop.Controllers
             MailMessage message = new MailMessage();
             message.To.Add(new MailAddress(order.Email));
             message.From = new MailAddress("maltar.ivan@gmail.com");
-            message.Subject = "[Nova naruđba]";
-            message.Body = "<h3>Upravo ste naručili:</h3><br/><hr/>" + order.ToEmailString() + "<hr/><br/> Uskoro ćemo vam se javiti s detaljima o plačanju i preuzimanju vaše naruđbe!";
+            message.Subject = "[Nova narudžba]";
+            message.Body = "<h3>Upravo ste naručili:</h3><br/><hr/>" + order.ToEmailString() + "<hr/><br/> Uskoro ćemo vam se javiti s detaljima o plačanju i preuzimanju vaše narudžbe!";
 
             message.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);

@@ -41,7 +41,7 @@
         <div class="row total-div">
             <label class="total-label">Ukupno: </label><p class="total-par">@Model.TotalPrice kn</p>
             <label class="total-label">Popust: </label><p class="total-par">@Model.Discount kn</p>
-            <label class="total-label">Za platiti: </label><p class="total-par">@(Model.TotalPrice - Model.Discount) kn</p>
+            <label class="total-label">Za platiti: </label><p class="total-par">@Model.PriceToPay kn</p>
         </div>
         <p><b>Ime:</b> @Model.Name</p>
         <p><b>Prezime:</b> @Model.Surname</p>

@@ -30,6 +30,10 @@ namespace WebShop.Models.ManageWebPage
         public bool Completed { get; set; }
         public bool Delivered { get; set; }
 
+        public double TotalPrice { get; set; }
+        public double Discount { get; set; }
+        public double PriceToPay { get; set; }
+
         public OrderVM(Order order)
         {
             ShoppingCartVM = new ShoppingCartVM(order.ShoppingCart);
@@ -49,14 +53,7 @@ namespace WebShop.Models.ManageWebPage
             PhoneNumber = order.PhoneNumber;
             if (order.PromoCode != null)
             {
-                if (!order.PromoCode.IsUsed)
-                {
-                    PromoCode = order.PromoCode.Code;
-                }
-                else
-                {
-                    PromoCode = "Nevažeći Promo Kod";
-                }
+                PromoCode = order.PromoCode.Code;
             }
             else
             {
@@ -64,6 +61,10 @@ namespace WebShop.Models.ManageWebPage
             }
             Completed = order.IsCompleted;
             Delivered = order.IsDelivered;
+
+            TotalPrice = order.TotalPrice;
+            Discount = order.Discount;
+            PriceToPay = TotalPrice - Discount;
         }
     }
 }

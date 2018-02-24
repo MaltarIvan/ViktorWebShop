@@ -28,6 +28,7 @@ namespace WebShop.Models.NewOrder
         public string PromoCode { get; set; }
         public double TotalPrice { get; set; }
         public double Discount { get; set; }
+        public double PriceToPay { get; set; }
 
         public NewOrderVM(Order order)
         {
@@ -50,15 +51,16 @@ namespace WebShop.Models.NewOrder
             {
                 if (order.PromoCode.IsUsed)
                 {
-                    PromoCode = "Ne Važeći Promo Kod";
+                    PromoCode = "Nevažeći Promo Kod";
                 }
                 else
                 {
                     PromoCode = order.PromoCode.Code;
                 }
             }
-            TotalPrice = order.GetTotalPrice();
-            Discount = order.GetDiscount();
+            TotalPrice = order.TotalPrice;
+            Discount = order.Discount;
+            PriceToPay = TotalPrice - Discount;
         }
     }
 }

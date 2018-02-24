@@ -11,10 +11,10 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>OrderPartial</title>
-    <link rel="stylesheet" href="~/css/ManageWebPage/orderPartial.css" asp-append-version="true" />
 </head>
 <body>
-    <p>Datum naruđbe: @Model.DateCreated</p>
+    <p><b>Datum narudžbe:</b> @Model.DateCreated</p>
+    <p><b>Broj Nauudžbe: </b>@Model.OrderID</p>
     <table class="order-items-table">
         <thead>
             <tr>
@@ -37,26 +37,28 @@
         </tbody>
     </table>
     <div class="row">
-        <div class="col-sm-6">
-            <p>Ukupno: @Model.ShoppingCartVM.TotalPrice</p>
-            <p>Ime: @Model.Name</p>
-            <p>Prezime: @Model.Surname</p>
-            <p>Adresa 1: @Model.StreetAdress1</p>
-            <p>Adresa 2: @Model.StreetAdress2</p>
-            <p>Grad: @Model.City</p>
-            <p>Poštanski broj: @Model.PostalCode</p>
-            <p>Država: @Model.Country</p>
-            <p>Email: @Model.Email</p>
-            <p>Broj mobitela: @Model.MobilePhoneNumber</p>
-            <p>Broj telefona: @Model.PhoneNumber</p>
-            <p>Promo Code: @Model.PromoCode</p>
+        <div class="col-sm-5">
+            <p><b>Ukupno:</b> @Model.TotalPrice</p>
+            <p><b>Popust:</b> @Model.Discount</p>
+            <p><b>Za platiti:</b> @Model.PriceToPay</p>
+            <p><b>Ime:</b> @Model.Name</p>
+            <p><b>Prezime:</b> @Model.Surname</p>
+            <p><b>Adresa 1:</b> @Model.StreetAdress1</p>
+            <p><b>Adresa 2:</b> @Model.StreetAdress2</p>
+            <p><b>Grad:</b> @Model.City</p>
+            <p><b>Poštanski broj:</b> @Model.PostalCode</p>
+            <p><b>Država:</b> @Model.Country</p>
+            <p><b>Email:</b> @Model.Email</p>
+            <p><b>Broj mobitela:</b> @Model.MobilePhoneNumber</p>
+            <p><b>Broj telefona:</b> @Model.PhoneNumber</p>
+            <p><b>Promo Code:</b> @Model.PromoCode</p>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             @if (!Model.Delivered)
             {
-                <button class="btn-success" onclick="setAsDelivered('@Model.OrderID')">Set as delivered</button>
+                <button class="btn btn-success button" onclick="setAsDelivered('@Model.OrderID')">Set as delivered</button><br />
             }
-            <button class="btn-danger" onclick="deleteOrder('@Model.OrderID')">Delete order</button>
+            <button class="btn btn-danger button" onclick="deleteOrder('@Model.OrderID')">Delete order</button>
         </div>
     </div>
 </body>

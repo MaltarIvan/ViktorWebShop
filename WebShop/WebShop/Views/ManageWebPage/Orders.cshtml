@@ -6,13 +6,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Naruđbe</h2>
+<head>
+    <link rel="stylesheet" href="~/css/ManageWebPage/orders.css" asp-append-version="true" />
+</head>
+
+<h2>Narudžbe</h2>
 <div class="row">
     <div class="col-sm-4">
-        <a class="btn btn-primary" style="width: 100%;" asp-action="AllOrders">Sve Naruđbe</a><br />
+        <a class="btn btn-primary button" asp-action="AllOrders">Sve Naruđbe</a><br />
     </div>
     <div class="col-sm-4">
-        <a class="btn btn-primary" style="width: 100%;" asp-action="DeliveredOrders">Poslane Naruđbe</a><br />
+        <a class="btn btn-primary button" asp-action="DeliveredOrders">Poslane Naruđbe</a><br />
     </div>
 </div>
 @foreach (var item in Model)
