@@ -98,7 +98,10 @@
                         <li><a asp-area="" asp-controller="ManageWebPage" asp-action="Index">Uredi Stranicu</a></li>
                     }
                 </ul>
-                @await Html.PartialAsync("_LoginPartial")
+                @if (User.IsInRole("Admin"))
+                {
+                    @await Html.PartialAsync("~/Views/Shared/_LoginPartial.cshtml");
+                }
             </div>
         </div>
     </nav>

@@ -35,7 +35,7 @@ function removeProduct(cartItemID) {
             }
             $("#" + cartItemID + "quantity").text(result.productCount);
             $("#total-price").text(result.totalPrice.toFixed(2) + " kn");
-            $("#" + cartItemID + "cart-item-price").text("Ukupno: " + result.cartItemPrice.toFixed(2) + " kn");
+            $("#" + cartItemID + "cart-item-price").text("Ukupno " + result.cartItemPrice.toFixed(2) + " kn");
             $("#number-of-items-nav").text(result.numberOfCartItems);
             if (result.numberOfCartItems === 0) {
                 $("#shop-nav-bar-item").css("color", "#9d9d9d");

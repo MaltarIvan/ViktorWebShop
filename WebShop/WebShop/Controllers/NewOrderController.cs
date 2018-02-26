@@ -10,6 +10,9 @@ using MimeKit;
 using System.Net.Mail;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace WebShop.Controllers
 {
@@ -187,16 +190,16 @@ namespace WebShop.Controllers
         private void SendOrderEmailShop(Order order)
         {
             MailMessage message = new MailMessage();
-            message.To.Add(new MailAddress("maltar.ivan@gmail.com"));
-            message.From = new MailAddress("maltar.ivan@gmail.com");
+            message.To.Add(new MailAddress("narudzbe@istramushrooms.com"));
+            message.From = new MailAddress("info@istramushrooms.com");
             message.Subject = "[Nova narudžba]";
             message.Body = "<h3>Napravljena je nova narudžba:</h3><br/><hr/> " + order.ToEmailString();
 
             message.IsBodyHtml = true;
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-            smtp.EnableSsl = true;
+            SmtpClient smtp = new SmtpClient("mail.istramushrooms.com", 587);
+            smtp.EnableSsl = false;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("maltar.ivan@gmail.com", "Forerunner205a");
+            smtp.Credentials = new System.Net.NetworkCredential("info@istramushrooms.com", "MamaTata+-2");
             smtp.Send(message);
         }
 
@@ -204,15 +207,15 @@ namespace WebShop.Controllers
         {
             MailMessage message = new MailMessage();
             message.To.Add(new MailAddress(order.Email));
-            message.From = new MailAddress("maltar.ivan@gmail.com");
+            message.From = new MailAddress("info@istramushrooms.com");
             message.Subject = "[Nova narudžba]";
             message.Body = "<h3>Upravo ste naručili:</h3><br/><hr/>" + order.ToEmailString() + "<hr/><br/> Uskoro ćemo vam se javiti s detaljima o plačanju i preuzimanju vaše narudžbe!";
 
             message.IsBodyHtml = true;
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-            smtp.EnableSsl = true;
+            SmtpClient smtp = new SmtpClient("mail.istramushrooms.com", 587);
+            smtp.EnableSsl = false;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("maltar.ivan@gmail.com", "Forerunner205a");
+            smtp.Credentials = new System.Net.NetworkCredential("info@istramushrooms.com", "MamaTata+-2");
             smtp.Send(message);
         }
     }
