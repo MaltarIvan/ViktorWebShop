@@ -64,15 +64,9 @@ namespace WebShop.Controllers
                 }
                 else
                 {
-                    var file = addNewProductVM.Image;
-                    var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Content\\products");
-                    string fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
-                    string path = Path.Combine(uploads, fileName);
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
-                    }
-                    Product product = new Product(addNewProductVM.Name, addNewProductVM.Description, Convert.ToDouble(priceDec), fileName);
+                    BinaryReader reader = new BinaryReader(addNewProductVM.Image.OpenReadStream());
+                    byte[] data = reader.ReadBytes((int)addNewProductVM.Image.Length);
+                    Product product = new Product(addNewProductVM.Name, addNewProductVM.Description, Convert.ToDouble(priceDec), data);
                     await _repository.AddProductAsync(product);
                     return RedirectToAction("Index");
                 }
@@ -161,15 +155,9 @@ namespace WebShop.Controllers
                 }
                 else
                 {
-                    var file = addPictureVM.Image;
-                    var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Content\\gallery");
-                    string fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
-                    string path = Path.Combine(uploads, fileName);
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
-                    }
-                    Picture picture = new Picture(addPictureVM.Description, fileName);
+                    BinaryReader reader = new BinaryReader(addPictureVM.Image.OpenReadStream());
+                    byte[] data = reader.ReadBytes((int)addPictureVM.Image.Length);
+                    Picture picture = new Picture(addPictureVM.Description, data);
                     await _repository.AddPictureAsync(picture);
                     return RedirectToAction("Index");
                 }

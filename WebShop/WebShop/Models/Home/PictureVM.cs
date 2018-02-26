@@ -10,13 +10,13 @@ namespace WebShop.Models.Home
     {
         public Guid PictureID { get; set; }
         public string Description { get; set; }
-        public string ImageName { get; set; }
+        public string ImageData { get; set; }
 
         public PictureVM(Picture picture)
         {
             PictureID = picture.PictureID;
             Description = picture.Description;
-            ImageName = picture.ImageName;
+            ImageData = Convert.ToBase64String(picture.Data);
         }
     }
 }

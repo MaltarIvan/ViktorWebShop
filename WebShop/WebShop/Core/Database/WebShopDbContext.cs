@@ -28,7 +28,7 @@ namespace WebShop.Core.Database
             modelBuilder.Entity<Product>().Property(p => p.DateAdded).IsRequired();
             modelBuilder.Entity<Product>().Property(p => p.Description).IsRequired();
             modelBuilder.Entity<Product>().Property(p => p.Price).IsRequired();
-            modelBuilder.Entity<Product>().Property(p => p.ImageName).IsRequired();
+            modelBuilder.Entity<Product>().Property(p => p.ImageData).IsRequired();
 
             modelBuilder.Entity<ShoppingCart>().HasKey(s => s.ShoppingCartID);
             modelBuilder.Entity<ShoppingCart>().HasMany(s => s.CartItems).WithRequired(c => c.ShoppingCart);
@@ -72,7 +72,7 @@ namespace WebShop.Core.Database
             modelBuilder.Entity<Picture>().HasKey(p => p.PictureID);
             modelBuilder.Entity<Picture>().Property(p => p.DateAdded).IsRequired();
             modelBuilder.Entity<Picture>().Property(p => p.Description).IsRequired();
-            modelBuilder.Entity<Picture>().Property(p => p.ImageName).IsRequired();
+            modelBuilder.Entity<Picture>().Property(p => p.Data).IsRequired();
         }
     }
 }

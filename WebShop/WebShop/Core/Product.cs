@@ -14,16 +14,16 @@ namespace WebShop.Core
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
-        public string ImageName { get; set; }
+        public byte[] ImageData { get; set; }
 
-        public Product(string name, string description, double price, string imageName)
+        public Product(string name, string description, double price, byte[] imageData)
         {
             ProductID = Guid.NewGuid();
             Name = name;
             DateAdded = DateTime.Now;
             Description = description;
             Price = price;
-            ImageName = imageName;
+            ImageData = imageData;
         }
 
         public Product()

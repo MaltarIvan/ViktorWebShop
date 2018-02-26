@@ -13,7 +13,7 @@ namespace WebShop.Models.WebShop
         public DateTime DateAdded;
         public string Description;
         public double Price;
-        public string ImageName;
+        public string ImageData;
         public int Quantity;
         public bool IsInCart;
 
@@ -25,7 +25,7 @@ namespace WebShop.Models.WebShop
             string description = product.Description.Replace(Environment.NewLine, "<br/>");
             Description = description;
             Price = product.Price;
-            ImageName = product.ImageName;
+            ImageData = Convert.ToBase64String(product.ImageData);
             IsInCart = isInCart;
         }
     }

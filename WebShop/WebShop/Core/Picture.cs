@@ -12,14 +12,14 @@ namespace WebShop.Core
         public Guid PictureID { get; set; }
         public DateTime DateAdded { get; set; }
         public string Description { get; set; }
-        public string ImageName { get; set; }
+        public byte[] Data { get; set; }
 
-        public Picture(string description, string imageName)
+        public Picture(string description, byte[] data)
         {
             PictureID = Guid.NewGuid();
             DateAdded = DateTime.Now;
             Description = description;
-            ImageName = imageName;
+            Data = data;
         }
 
         public Picture()
