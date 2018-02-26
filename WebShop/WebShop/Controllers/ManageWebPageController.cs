@@ -48,7 +48,17 @@ namespace WebShop.Controllers
             {
                 string priceStr = addNewProductVM.Price;
                 priceStr = priceStr.Replace(".", ",");
-                Decimal priceDec = Convert.ToDecimal(priceStr);
+                Decimal priceDec = new Decimal();
+                try
+                {
+                    priceDec = Convert.ToDecimal(priceStr);
+                }
+                catch (FormatException)
+                {
+                    ModelState.AddModelError("CustomError", "The price format is incorrect.");
+                    addNewProductVM.Price = null;
+                    return View(addNewProductVM);
+                }
                 bool isPriceFormat = Decimal.Round(priceDec, 2) == priceDec;
                 if (!validImageTypes.Contains(addNewProductVM.Image.ContentType))
                 {
