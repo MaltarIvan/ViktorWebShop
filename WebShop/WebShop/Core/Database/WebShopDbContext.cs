@@ -62,6 +62,7 @@ namespace WebShop.Core.Database
             modelBuilder.Entity<Order>().Property(o => o.IsDelivered).IsRequired();
             modelBuilder.Entity<Order>().Property(o => o.TotalPrice).IsOptional();
             modelBuilder.Entity<Order>().Property(o => o.Discount).IsOptional();
+            modelBuilder.Entity<Order>().Property(o => o.PaymentMethod).IsRequired();
 
             modelBuilder.Entity<PromoCode>().HasKey(p => p.PromoCodeID);
             modelBuilder.Entity<PromoCode>().Property(p => p.Code).IsRequired();

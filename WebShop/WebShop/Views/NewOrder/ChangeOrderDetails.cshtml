@@ -74,6 +74,10 @@
                     </div>
                 </div>
                 <div class="row input-section">
+                    <p>Napomena: dostava je besplatna!</p>
+                    <label class="info-label">Način plaćanja: <span style="color: red;">*</span></label><br />@Html.DropDownListFor(Model => Model.PaymentMethod, Order.PAYMENT_METHOD, new { @class = "countries-drop-down" })
+                </div>
+                <div class="row input-section">
                     <label class="info-label">Promotivni kod: </label><br /><input class="info-input" asp-for="PromoCode" placeholder="Promotivni kod" /><span asp-validation-for="PromoCode" style="color:red"></span><br />
                 </div>
                 <div class="row input-section">

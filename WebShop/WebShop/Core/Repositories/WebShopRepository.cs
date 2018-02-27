@@ -145,6 +145,7 @@ namespace WebShop.Core.Repositories
             ord.PromoCode = order.PromoCode;
             ord.IsCompleted = order.IsCompleted;
             ord.IsDelivered = order.IsDelivered;
+            ord.PaymentMethod = order.PaymentMethod;
             await _context.SaveChangesAsync();
             return order;
         }

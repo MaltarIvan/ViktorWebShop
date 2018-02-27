@@ -33,6 +33,7 @@ namespace WebShop.Models.ManageWebPage
         public double TotalPrice { get; set; }
         public double Discount { get; set; }
         public double PriceToPay { get; set; }
+        public string PaymentMethod { get; set; }
 
         public OrderVM(Order order)
         {
@@ -65,6 +66,7 @@ namespace WebShop.Models.ManageWebPage
             TotalPrice = order.TotalPrice;
             Discount = order.Discount;
             PriceToPay = TotalPrice - Discount;
+            PaymentMethod = order.PaymentMethod;
         }
     }
 }

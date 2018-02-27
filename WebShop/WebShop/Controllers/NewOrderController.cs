@@ -73,7 +73,8 @@ namespace WebShop.Controllers
                     PhoneNumber = addNewOrderVM.PhoneNumber,
                     PromoCode = promoCode,
                     IsCompleted = false,
-                    IsDelivered = false
+                    IsDelivered = false,
+                    PaymentMethod = addNewOrderVM.PaymentMethod
                 };
                 order.TotalPrice = order.GetTotalPrice();
                 order.Discount = order.GetDiscount();
@@ -104,7 +105,8 @@ namespace WebShop.Controllers
                 Email = order.Email,
                 MobilePhoneNumber = order.MobilePhoneNumber,
                 PhoneNumber = order.PhoneNumber,
-                PromoCode = pC
+                PromoCode = pC,
+                PaymentMethod = order.PaymentMethod
             };
             return View(changeOrderDetailsVM);
         }
@@ -142,7 +144,8 @@ namespace WebShop.Controllers
                     PhoneNumber = changeOrderDetailsVM.PhoneNumber,
                     PromoCode = promoCode,
                     IsCompleted = false,
-                    IsDelivered = false
+                    IsDelivered = false,
+                    PaymentMethod = changeOrderDetailsVM.PaymentMethod
                 };
                 order.TotalPrice = order.GetTotalPrice();
                 order.Discount = order.GetDiscount();

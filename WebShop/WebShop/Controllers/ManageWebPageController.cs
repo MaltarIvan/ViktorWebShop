@@ -91,6 +91,28 @@ namespace WebShop.Controllers
             return View(addNewPromoCodeVM);
         }
 
+        public IActionResult AddNewPromoCodeAutomated()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddNewPromoCodeAutomated(AddPromoCodeAutomatedVM addPromoCodeAutomatedVM)
+        {
+            if (ModelState.IsValid)
+            {
+                Random random = new Random();
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                for (int i = 0; i < addPromoCodeAutomatedVM.NumberOfCodes; i++)
+                {
+                    PromoCode promoCode = new PromoCode(new string(Enumerable.Repeat(chars, addPromoCodeAutomatedVM.CodeLength).Select(s => s[random.Next(s.Length)]).ToArray()), addPromoCodeAutomatedVM.Category);
+                    await _repository.AddPromoCodeAsync(promoCode);
+                }
+                return RedirectToAction("PromoCodes");
+            }
+            return View(addPromoCodeAutomatedVM);
+        }
+
         public async Task<IActionResult> AllOrders()
         {
             List<Order> completedOrders = await _repository.GetAllCompletedOrdersAsync();

@@ -14,6 +14,12 @@ namespace WebShop.Core
 
         };
 
+        public static SelectListItem[] PAYMENT_METHOD = new SelectListItem[]
+        {
+            new SelectListItem() { Text = "Pouzeće", Value = "Pouzeće"},
+            new SelectListItem() { Text = "Uplata na račun", Value = "Uplata na račun"},
+        };
+
         [Key]
         public Guid OrderID { get; set; }
         public DateTime DateCreated { get; set; }
@@ -34,8 +40,9 @@ namespace WebShop.Core
         public bool IsDelivered { get; set; }
         public double TotalPrice { get; set; }
         public double Discount { get; set; }
+        public string PaymentMethod { get; set; }
 
-        public Order(ShoppingCart shoppingCart, string name, string surname, string streetAdress1, string streetAdress2, string city, int postalCode, string country, string email, string mobilePhoneNumber, string phoneNumber, PromoCode promoCode)
+        public Order(ShoppingCart shoppingCart, string name, string surname, string streetAdress1, string streetAdress2, string city, int postalCode, string country, string email, string mobilePhoneNumber, string phoneNumber, PromoCode promoCode, string paymentMethod)
         {
             OrderID = Guid.NewGuid();
             DateCreated = DateTime.Now;
@@ -52,6 +59,7 @@ namespace WebShop.Core
             PromoCode = promoCode;
             IsCompleted = false;
             IsDelivered = false;
+            PaymentMethod = paymentMethod;
         }
 
         public Order()
@@ -88,9 +96,10 @@ namespace WebShop.Core
                 "<br/><b>Poštanski broj:</b> " + PostalCode +
                 "<br/><b>Država:</b> " + Country +
                 "<br/><b>Email:</b> " + Email +
-                "<br/><b>Broj mobitela:</b> " + MobilePhoneNumber +
-                "<br/><b>Broj telefona:</b> " + PhoneNumber +
-                "<br/><b>Promo Kod:</b> ";
+                "<br/><b>Broj mobitela: </b> " + MobilePhoneNumber +
+                "<br/><b>Broj telefona: </b> " + PhoneNumber +
+                "<br/><b>Način plaćanja: </b>" + PaymentMethod +
+                "<br/><b>Promo Kod: </b> ";
             if (PromoCode != null)
             {
                 str += PromoCode.Code;

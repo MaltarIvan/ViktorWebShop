@@ -29,6 +29,7 @@ namespace WebShop.Models.NewOrder
         public double TotalPrice { get; set; }
         public double Discount { get; set; }
         public double PriceToPay { get; set; }
+        public string PaymentMethod { get; set; }
 
         public NewOrderVM(Order order)
         {
@@ -61,6 +62,7 @@ namespace WebShop.Models.NewOrder
             TotalPrice = order.TotalPrice;
             Discount = order.Discount;
             PriceToPay = TotalPrice - Discount;
+            PaymentMethod = order.PaymentMethod;
         }
     }
 }
