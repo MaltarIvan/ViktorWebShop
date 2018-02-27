@@ -37,6 +37,7 @@ namespace WebShop.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewProduct(AddNewProductVM addNewProductVM)
         {
+            /*
             var validImageTypes = new string[]
             {
                     "image/gif",
@@ -44,16 +45,17 @@ namespace WebShop.Controllers
                     "image/pjpeg",
                     "image/png"
             };
+            */
             if (ModelState.IsValid)
             {
                 string priceStr = addNewProductVM.Price;
                 priceStr = priceStr.Replace(".", ",");
                 Decimal priceDec = Convert.ToDecimal(priceStr);
                 bool isPriceFormat = Decimal.Round(priceDec, 2) == priceDec;
-                if (!validImageTypes.Contains(addNewProductVM.Image.ContentType))
+                if (addNewProductVM.ImageName.Contains(".gif") || addNewProductVM.ImageName.Contains(".jpeg") || addNewProductVM.ImageName.Contains(".pjpeg") || addNewProductVM.ImageName.Contains(".png"))
                 {
                     ModelState.AddModelError("CustomError", "Please choose either a GIF, JPG or PNG image.");
-                    addNewProductVM.Image = null;
+                    addNewProductVM.ImageName = null;
                     return View(addNewProductVM);
                 }
                 else if (!isPriceFormat)
@@ -64,15 +66,7 @@ namespace WebShop.Controllers
                 }
                 else
                 {
-                    var file = addNewProductVM.Image;
-                    var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Content\\products");
-                    string fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
-                    string path = Path.Combine(uploads, fileName);
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
-                    }
-                    Product product = new Product(addNewProductVM.Name, addNewProductVM.Description, Convert.ToDouble(priceDec), fileName);
+                    Product product = new Product(addNewProductVM.Name, addNewProductVM.Description, Convert.ToDouble(priceDec), addNewProductVM.ImageName);
                     await _repository.AddProductAsync(product);
                     return RedirectToAction("Index");
                 }
@@ -144,6 +138,7 @@ namespace WebShop.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPictureToGallery(AddPictureVM addPictureVM)
         {
+            /*
             var validImageTypes = new string[]
             {
                     "image/gif",
@@ -151,25 +146,18 @@ namespace WebShop.Controllers
                     "image/pjpeg",
                     "image/png"
             };
+            */
             if (ModelState.IsValid)
             {
-                if (!validImageTypes.Contains(addPictureVM.Image.ContentType))
+                if (addPictureVM.ImageName.Contains(".gif") || addPictureVM.ImageName.Contains(".jpeg") || addPictureVM.ImageName.Contains(".pjpeg") || addPictureVM.ImageName.Contains(".png"))
                 {
                     ModelState.AddModelError("CustomError", "Please choose either a GIF, JPG or PNG image.");
-                    addPictureVM.Image = null;
+                    addPictureVM.ImageName = null;
                     return View(addPictureVM);
                 }
                 else
                 {
-                    var file = addPictureVM.Image;
-                    var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Content\\gallery");
-                    string fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
-                    string path = Path.Combine(uploads, fileName);
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
-                    }
-                    Picture picture = new Picture(addPictureVM.Description, fileName);
+                    Picture picture = new Picture(addPictureVM.Description, addPictureVM.ImageName);
                     await _repository.AddPictureAsync(picture);
                     return RedirectToAction("Index");
                 }

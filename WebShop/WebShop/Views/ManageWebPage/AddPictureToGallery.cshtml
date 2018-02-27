@@ -30,15 +30,8 @@
                 <label class="info-label">Opis slike: </label><input class="info-input" asp-for="Description" /><span asp-validation-for="Description" style="color: red;"></span><br />
             </div>
             <div class="row input-section">
-                <label>Slika proizvoda: </label><br />
-                <label>
-                    <i class="btn btn-default"><span class="glyphicon glyphicon-upload"></span> Učitaj sliku</i>
-                    <input asp-for="Image" id="file-upload" type="file" onchange="ShowPreview(this)" /><span asp-validation-for="Image" style="color:red"></span> <br />
-                </label>
-            </div>
-            <div class="row">
-                <img id="imgPrev" src="~/Content/default-picture.svg" class="Img-prev" style="width: 100px;" /><br />
-                <label id="file-name" class="File-label">No file chosen.</label><br />
+                <label>Ime slike: </label><input asp-for="ImageName" class="info-input" /><span asp-validation-for="ImageName" style="color:red"></span> <br />
+                <p>(Slika mora biti dodana u folder wwwroots/Content/gallery. Potrebno je napisati ime datoteke s pripadajućom ekstenzijom (npr. image.jpg))</p>
             </div>
             <div class="row">
                 <div class="col-sm-6">
@@ -49,7 +42,3 @@
         </div>
     </form>
 </div>
-
-@section Scripts {
-    <script src="~/js/ManageWebPage/AddPicture.js"></script>
-}
