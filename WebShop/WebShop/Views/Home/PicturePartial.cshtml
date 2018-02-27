@@ -11,7 +11,7 @@
         <title>PicturePartial</title>
     </head>
     <body>
-        <img style="height: auto; width: 100%" src="data:image/png;base64, @Model.ImageData"  /><br />
+        <img style="height: auto; width: 100%" src="~/Content/gallery/@Model.ImageName" /><br />
         <p>@Model.Description</p>
         @if (User.IsInRole("Admin"))
         {

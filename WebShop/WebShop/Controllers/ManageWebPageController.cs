@@ -48,17 +48,7 @@ namespace WebShop.Controllers
             {
                 string priceStr = addNewProductVM.Price;
                 priceStr = priceStr.Replace(".", ",");
-                Decimal priceDec = new Decimal();
-                try
-                {
-                    priceDec = Convert.ToDecimal(priceStr);
-                }
-                catch (FormatException)
-                {
-                    ModelState.AddModelError("CustomError", "The price format is incorrect.");
-                    addNewProductVM.Price = null;
-                    return View(addNewProductVM);
-                }
+                Decimal priceDec = Convert.ToDecimal(priceStr);
                 bool isPriceFormat = Decimal.Round(priceDec, 2) == priceDec;
                 if (!validImageTypes.Contains(addNewProductVM.Image.ContentType))
                 {
@@ -74,9 +64,15 @@ namespace WebShop.Controllers
                 }
                 else
                 {
-                    BinaryReader reader = new BinaryReader(addNewProductVM.Image.OpenReadStream());
-                    byte[] data = reader.ReadBytes((int)addNewProductVM.Image.Length);
-                    Product product = new Product(addNewProductVM.Name, addNewProductVM.Description, Convert.ToDouble(priceDec), data);
+                    var file = addNewProductVM.Image;
+                    var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Content\\products");
+                    string fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                    string path = Path.Combine(uploads, fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+                    Product product = new Product(addNewProductVM.Name, addNewProductVM.Description, Convert.ToDouble(priceDec), fileName);
                     await _repository.AddProductAsync(product);
                     return RedirectToAction("Index");
                 }
@@ -165,9 +161,15 @@ namespace WebShop.Controllers
                 }
                 else
                 {
-                    BinaryReader reader = new BinaryReader(addPictureVM.Image.OpenReadStream());
-                    byte[] data = reader.ReadBytes((int)addPictureVM.Image.Length);
-                    Picture picture = new Picture(addPictureVM.Description, data);
+                    var file = addPictureVM.Image;
+                    var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Content\\gallery");
+                    string fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                    string path = Path.Combine(uploads, fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+                    Picture picture = new Picture(addPictureVM.Description, fileName);
                     await _repository.AddPictureAsync(picture);
                     return RedirectToAction("Index");
                 }

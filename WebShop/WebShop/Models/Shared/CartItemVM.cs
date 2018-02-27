@@ -12,7 +12,7 @@ namespace WebShop.Models.Shared
         public Guid ProductID { get; set; }
         public string ProductName { get; set; }
         public int Quantity { get; set; }
-        public string ImageData { get; set; }
+        public string ImageName { get; set; }
         public double PricePerItem { get; set; }
         public double TotalPrice { get; set; }
 
@@ -22,7 +22,7 @@ namespace WebShop.Models.Shared
             ProductID = cartItem.ProductID;
             ProductName = cartItem.Product.Name;
             Quantity = cartItem.Quantity;
-            ImageData = Convert.ToBase64String(cartItem.Product.ImageData);
+            ImageName = cartItem.Product.ImageName;
             PricePerItem = cartItem.PricePerItem;
             TotalPrice = cartItem.PricePerItem * cartItem.Quantity;
         }

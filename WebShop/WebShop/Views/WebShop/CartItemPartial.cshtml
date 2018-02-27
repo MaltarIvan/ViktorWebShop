@@ -32,7 +32,7 @@
         </div>
         <p>Cijena proizvoda:  @Model.PricePerItem kn</p>
         <p id="@(Model.CartItemID + "cart-item-price")">Ukupno: @Model.TotalPrice kn</p>
-        <img class="product-img" src="data:image/png;base64, @Model.ImageData" /><br />
+        <img class="product-img" src="~/Content/products/@Model.ImageName" /><br />
         <div class="row">
             <div class="col-sm-6">
                 <button class="btn btn-danger button" id="addButton" onclick="deleteProduct('@Model.CartItemID')">Ukloni iz košarice!</button>
