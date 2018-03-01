@@ -196,7 +196,7 @@ namespace WebShop.Core.Repositories
 
         public async Task<List<PromoCode>> GetAllPromoCodesAsync()
         {
-            return await _context.PromoCodes.ToListAsync();
+            return await _context.PromoCodes.OrderBy(p => p.DateCreated).ToListAsync();
         }
 
         public async Task<Picture> AddPictureAsync(Picture picture)

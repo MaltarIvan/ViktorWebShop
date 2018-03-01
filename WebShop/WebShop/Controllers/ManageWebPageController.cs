@@ -86,7 +86,7 @@ namespace WebShop.Controllers
             {
                 PromoCode promoCode = new PromoCode(addNewPromoCodeVM.Code, addNewPromoCodeVM.Category);
                 await _repository.AddPromoCodeAsync(promoCode);
-                return RedirectToAction("PromoCodes");
+                return RedirectToAction("PromoCodesDate");
             }
             return View(addNewPromoCodeVM);
         }
@@ -108,7 +108,7 @@ namespace WebShop.Controllers
                     PromoCode promoCode = new PromoCode(new string(Enumerable.Repeat(chars, addPromoCodeAutomatedVM.CodeLength).Select(s => s[random.Next(s.Length)]).ToArray()), addPromoCodeAutomatedVM.Category);
                     await _repository.AddPromoCodeAsync(promoCode);
                 }
-                return RedirectToAction("PromoCodes");
+                return RedirectToAction("PromoCodesDate");
             }
             return View(addPromoCodeAutomatedVM);
         }
@@ -135,7 +135,7 @@ namespace WebShop.Controllers
             return View("Orders", completedOrdersVM);
         }
 
-        public async Task<IActionResult> PromoCodes()
+        public async Task<IActionResult> PromoCodesDate()
         {
             List<PromoCode> promoCodes = await _repository.GetAllPromoCodesAsync();
             List<PromoCodeVM> promoCodesVM = new List<PromoCodeVM>();
@@ -143,7 +143,91 @@ namespace WebShop.Controllers
             {
                 promoCodesVM.Add(new PromoCodeVM(item));
             }
-            return View(promoCodesVM);
+            return View("PromoCodes", promoCodesVM);
+        }
+
+        public async Task<IActionResult> PromoCodesCategory()
+        {
+            List<PromoCode> promoCodes = await _repository.GetAllPromoCodesAsync();
+            promoCodes = promoCodes.OrderBy(p => p.Category).ToList();
+            List<PromoCodeVM> promoCodesVM = new List<PromoCodeVM>();
+            foreach (var item in promoCodes)
+            {
+                promoCodesVM.Add(new PromoCodeVM(item));
+            }
+            return View("PromoCodes", promoCodesVM);
+        }
+
+        public async Task<IActionResult> PromoCodesCategory1()
+        {
+            List<PromoCode> promoCodes = await _repository.GetAllPromoCodesAsync();
+            promoCodes = promoCodes.Where(p => p.Category == 1).OrderBy(p => p.Category).ToList();
+            List<PromoCodeVM> promoCodesVM = new List<PromoCodeVM>();
+            foreach (var item in promoCodes)
+            {
+                promoCodesVM.Add(new PromoCodeVM(item));
+            }
+            return View("PromoCodes", promoCodesVM);
+        }
+
+        public async Task<IActionResult> PromoCodesCategory2()
+        {
+            List<PromoCode> promoCodes = await _repository.GetAllPromoCodesAsync();
+            promoCodes = promoCodes.Where(p => p.Category == 2).OrderBy(p => p.Category).ToList();
+            List<PromoCodeVM> promoCodesVM = new List<PromoCodeVM>();
+            foreach (var item in promoCodes)
+            {
+                promoCodesVM.Add(new PromoCodeVM(item));
+            }
+            return View("PromoCodes", promoCodesVM);
+        }
+
+        public async Task<IActionResult> PromoCodesCategory3()
+        {
+            List<PromoCode> promoCodes = await _repository.GetAllPromoCodesAsync();
+            promoCodes = promoCodes.Where(p => p.Category == 3).OrderBy(p => p.Category).ToList();
+            List<PromoCodeVM> promoCodesVM = new List<PromoCodeVM>();
+            foreach (var item in promoCodes)
+            {
+                promoCodesVM.Add(new PromoCodeVM(item));
+            }
+            return View("PromoCodes", promoCodesVM);
+        }
+
+        public async Task<IActionResult> PromoCodesCategory4()
+        {
+            List<PromoCode> promoCodes = await _repository.GetAllPromoCodesAsync();
+            promoCodes = promoCodes.Where(p => p.Category == 4).OrderBy(p => p.Category).ToList();
+            List<PromoCodeVM> promoCodesVM = new List<PromoCodeVM>();
+            foreach (var item in promoCodes)
+            {
+                promoCodesVM.Add(new PromoCodeVM(item));
+            }
+            return View("PromoCodes", promoCodesVM);
+        }
+
+        public async Task<IActionResult> PromoCodesCategory5()
+        {
+            List<PromoCode> promoCodes = await _repository.GetAllPromoCodesAsync();
+            promoCodes = promoCodes.Where(p => p.Category == 5).OrderBy(p => p.Category).ToList();
+            List<PromoCodeVM> promoCodesVM = new List<PromoCodeVM>();
+            foreach (var item in promoCodes)
+            {
+                promoCodesVM.Add(new PromoCodeVM(item));
+            }
+            return View("PromoCodes", promoCodesVM);
+        }
+
+        public async Task<IActionResult> PromoCodesCategory6()
+        {
+            List<PromoCode> promoCodes = await _repository.GetAllPromoCodesAsync();
+            promoCodes = promoCodes.Where(p => p.Category == 6).OrderBy(p => p.Category).ToList();
+            List<PromoCodeVM> promoCodesVM = new List<PromoCodeVM>();
+            foreach (var item in promoCodes)
+            {
+                promoCodesVM.Add(new PromoCodeVM(item));
+            }
+            return View("PromoCodes", promoCodesVM);
         }
 
         public async Task<IActionResult> RemoveProduct(Guid productID)

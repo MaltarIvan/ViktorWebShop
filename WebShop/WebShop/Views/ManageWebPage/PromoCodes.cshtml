@@ -9,9 +9,29 @@
 <link rel="stylesheet" href="~/css/ManageWebPage/promoCodes.css" asp-append-version="true" />
 
 <h2>Promotivni Kodovi</h2>
-<a class="btn btn-primary" style="width: 100%; margin: 5px;" asp-action="AddNewPromoCode">Dodaj Novi Promo Kod</a><br />
-<a class="btn btn-primary" style="width: 100%; margin: 5px;" asp-action="AddNewPromoCodeAutomated">Automatsko Dodavanje Promo Kodova</a><br />
+<div class="row">
+    <div class="col-sm-4" style="margin-top: 25px;">
+        <a class="btn btn-success button" asp-action="AddNewPromoCode">Dodaj Novi Promo Kod</a><br />
+        <a class="btn btn-success button" asp-action="AddNewPromoCodeAutomated">Automatsko Dodavanje Promo Kodova</a><br />
+    </div>
+    <div class="col-sm-4">
+        <label>Sortiraj: </label>
+        <a class="btn btn-primary button" asp-action="PromoCodesDate">Po Datumu Objave</a><br />
+        <a class="btn btn-primary button" asp-action="PromoCodesCategory">Po Kategoriji</a><br />
+    </div>
+    <div class="col-sm-4">
+        <label>Filtriraj: </label>
+        <a class="btn btn-primary button" asp-action="PromoCodesCategory1">1 gratis</a><br />
+        <a class="btn btn-primary button" asp-action="PromoCodesCategory2">2 gratis</a><br />
+        <a class="btn btn-primary button" asp-action="PromoCodesCategory3">Popust 100 kn</a><br />
+        <a class="btn btn-primary button" asp-action="PromoCodesCategory4">Popust 200 kn</a><br />
+        <a class="btn btn-primary button" asp-action="PromoCodesCategory5">Popust 50%</a><br />
+        <a class="btn btn-primary button" asp-action="PromoCodesCategory6">Popust 25%</a><br />
+    </div>
+</div>
 <hr />
+@if (Model.Count > 0)
+{
     <table class="promo-code-table">
         <thead>
             <tr>
@@ -23,18 +43,24 @@
             </tr>
         </thead>
         <tbody>
-                @foreach (var item in Model)
+            @foreach (var item in Model)
                 {
-                    <tr id="@(item.PromoCodeID + "table-row")">
-                        <td>@item.Code</td>
-                        <td>@item.Category</td>
-                        <td>@item.DateCreated</td>
-                        <td>@item.IsUsed</td>
-                        <td><button onclick="deletePromoCode('@item.PromoCodeID')">Delete</button></td>
-                    </tr>
-                }
+                <tr id="@(item.PromoCodeID + "table-row")">
+                    <td>@item.Code</td>
+                    <td>@item.Category</td>
+                    <td>@item.DateCreated</td>
+                    <td>@item.IsUsed</td>
+                    <td><button onclick="deletePromoCode('@item.PromoCodeID')">Delete</button></td>
+                </tr>
+            }
         </tbody>
     </table>
+} else
+{
+    <label>Nema Promo Kodova Za Prikaz!</label>
+}
+
+
 
 @section Scripts {
     <script src="~/js/ManageWebPage/promoCodes.js"></script>
