@@ -135,7 +135,7 @@ namespace WebShop.Controllers
             return View("Orders", completedOrdersVM);
         }
 
-        public async Task<IActionResult> PromoCodesDate()
+        public async Task<IActionResult> PromoCodes()
         {
             List<PromoCode> promoCodes = await _repository.GetAllPromoCodesAsync();
             List<PromoCodeVM> promoCodesVM = new List<PromoCodeVM>();

@@ -14,7 +14,7 @@
 </head>
 <body>
     <p><b>Datum narudžbe:</b> @Model.DateCreated</p>
-    <p><b>Broj Nauudžbe: </b>@Model.OrderID</p>
+    <p><b>Broj Narudžbe: </b>@Model.OrderID</p>
     <table class="order-items-table">
         <thead>
             <tr>
@@ -30,17 +30,17 @@
                 <tr>
                     <td>@item.ProductName</td>
                     <td>@item.Quantity</td>
-                    <td>@item.PricePerItem</td>
-                    <td>@item.TotalPrice</td>
+                    <td>@item.PricePerItem kn</td>
+                    <td>@item.TotalPrice kn</td>
                 </tr>
             }
         </tbody>
     </table>
     <div class="row">
         <div class="col-sm-5">
-            <p><b>Ukupno:</b> @Model.TotalPrice</p>
-            <p><b>Popust:</b> @Model.Discount</p>
-            <p><b>Za platiti:</b> @Model.PriceToPay</p>
+            <p><b>Ukupno:</b> @Model.TotalPrice kn</p>
+            <p><b>Popust:</b> @Model.Discount kn</p>
+            <p><b>Za platiti:</b> @Model.PriceToPay kn</p>
             <p><b>Ime:</b> @Model.Name</p>
             <p><b>Prezime:</b> @Model.Surname</p>
             <p><b>Adresa 1:</b> @Model.StreetAdress1</p>

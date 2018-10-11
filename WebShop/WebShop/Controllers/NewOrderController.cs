@@ -177,8 +177,11 @@ namespace WebShop.Controllers
             SendOrderEmailClient(order);
             if (order.PromoCode != null)
             {
-                order.PromoCode.IsUsed = true;
-                await _repository.UpdatePromoCodeAsync(order.PromoCode);
+                if (order.PromoCode.Code != "WEBPOPUST25")
+                {
+                    order.PromoCode.IsUsed = true;
+                    await _repository.UpdatePromoCodeAsync(order.PromoCode);
+                }
             }
             ShoppingCartActions shoppingCartActions = new ShoppingCartActions(HttpContext.Session, _repository);
             ShoppingCart shoppingCart = new ShoppingCart(Guid.NewGuid());

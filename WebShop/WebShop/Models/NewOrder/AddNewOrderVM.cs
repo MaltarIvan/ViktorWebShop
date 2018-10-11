@@ -20,13 +20,13 @@ namespace WebShop.Models.NewOrder
         [MinLength(5)]
         public string StreetAdress2 { get; set; }
 
-        [Required, MinLength(5)]
+        [Required]
         public string City { get; set; }
 
         [Required]
         public int PostalCode { get; set; }
 
-        [Required, MinLength(5)]
+        [Required]
         public string Country { get; set; }
 
         [Required]

@@ -16,7 +16,7 @@
     </div>
     <div class="col-sm-4">
         <label>Sortiraj: </label>
-        <a class="btn btn-primary button" asp-action="PromoCodesDate">Po Datumu Objave</a><br />
+        <a class="btn btn-primary button" asp-action="PromoCodes">Po Datumu Objave</a><br />
         <a class="btn btn-primary button" asp-action="PromoCodesCategory">Po Kategoriji</a><br />
     </div>
     <div class="col-sm-4">
@@ -44,13 +44,21 @@
         </thead>
         <tbody>
             @foreach (var item in Model)
-                {
+            {
                 <tr id="@(item.PromoCodeID + "table-row")">
                     <td>@item.Code</td>
                     <td>@item.Category</td>
                     <td>@item.DateCreated</td>
                     <td>@item.IsUsed</td>
-                    <td><button onclick="deletePromoCode('@item.PromoCodeID')">Delete</button></td>
+                    <td>
+                        <!--
+                        @if (!item.IsUsed)
+                        {
+                            <button onclick="deletePromoCode('@item.PromoCodeID')">Delete</button>
+                        }
+                        -->
+                        <button onclick="deletePromoCode('@item.PromoCodeID')">Delete</button>
+                    </td>
                 </tr>
             }
         </tbody>
